@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Server</title>
+  </head>
+  <body>
+    <!-- login page -->
+    <section class="login container section">
+      <div class="login__container">
+        <h1 class="login__title">Admin Login</h1>
+        <form class="login__form" id="loginForm">
+          <div class="login__form-group">
+            <div class="login__label-group">
+              <label for="username">Username</label>
+              <label for="password">Password</label>
+            </div>
+            <div class="login__input-group">
+              <input type="text" id="username" name="username" />
+              <input type="password" id="password" name="password" />
+            </div>
+          </div>
+          <button type="button" class="login__btn btn">Login</button>
+        </form>
+      </div>
+    </section>
+    <!-- Dashboard -->
+    <main class="dashboard">
+      <section class="hero container section">
+        <div class="hero-wrapper">
+          <h2 class="hero__title">Welcome Back!</h2>
+          <div class="hero__content">
+            <p class="hero__content-description">To the admin dashboard!</p>
+            <p class="hero__content-description">
+              Here you can manage your application settings.
+            </p>
+          </div>
+          <button class="hero__logout-btn btn">Logout</button>
+        </div>
+        <div class="hero__views">Views <span>0</span></div>
+      </section>
+      <section class="editor__hero section container">
+        <h2 class="editor__hero-title">Hero Images</h2>
+        <div class="editor__hero-wrapper">
+          <button class="editor__hero-btn-add btn">Add</button>
+          <div class="editor__hero-list placeholder-list">
+            <div class="editor__hero-item">
+              <img
+                class="editor__hero-placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="editor__hero-btn-remove btn">Remove</button>
+            </div>
+            <div class="editor__hero-item">
+              <img
+                class="editor__hero-placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="editor__hero-btn-remove btn">Remove</button>
+            </div>
+            <div class="editor__hero-item">
+              <img
+                class="editor__hero-placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="editor__hero-btn-remove btn">Remove</button>
+            </div>
+          </div>
+          <div class="editor__hero-list not-placeholder-list"></div>
+        </div>
+      </section>
+      <section></section>
+    </main>
+  </body>
+
+  <script src="./src/main.js" type="module"></script>
+</html>
