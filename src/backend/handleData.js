@@ -5,7 +5,7 @@ import getHeroImgs from "./hero-data";
 const handleData = async () => {
   // console.log("getting meta data...");
   // getMetaData();
-  getHeroImgs();
+  // getHeroImgs();
 };
 
 export default handleData;

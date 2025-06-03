@@ -1,17 +1,194 @@
+.editor__hero {
+  --editor-wrapper-size: 360px;
+  --dragable-size: 250px;
+}
+
 .editor__hero-title {
   font-size: var(--size-2xl);
-  color: var(--color-slate-600);
+  color: var(--color-slate-800);
   margin-bottom: 0.5rem;
 }
 
+/* dragHolder start */
+.editor__hero-dragHolder-wrapper {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  backdrop-filter: blur(5px);
+}
+
+.editor__hero-dragHolder {
+  background-color: var(--color-slate-50);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.2rem 0.5rem;
+
+  border: 1px solid var(--color-slate-400);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  z-index: 999;
+}
+
+.editor__hero-dragHolder-title {
+  font-size: var(--size-sm);
+  color: var(--color-slate-600);
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.dragHolder__close-btn {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+  font-size: var(--size-xs);
+}
+
+.editor__hero-dragHolder-content {
+  height: var(--dragable-size);
+  aspect-ratio: 1;
+  border: 1px solid var(--color-slate-600);
+  border-radius: 6px;
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.editor__hero-dragHolder-content svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 40%;
+  object-fit: cover;
+  color: var(--color-slate-600);
+}
+
+.editor__hero-dragHolder-content svg:has(+ .dragHolder__img-item) {
+  display: none;
+}
+
+.dragHolder__img-item {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+}
+
+.dragHolder__img-item img {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 0.5rem;
+}
+
+.dragHolder__resize-required {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  background-color: var(--color-slate-50);
+  border-radius: 6px;
+  padding: 0.1em 0.4em;
+  color: var(--color-red-600);
+  font-size: var(--size-xs);
+  font-weight: 500;
+}
+
+.dragHolder__resize-required span {
+  display: inline-block;
+  width: var(--size-2xl);
+}
+
+/* input field start*/
+.editor__hero-dragHolder-content-input::before {
+  content: "or";
+  font-size: var(--size-sm);
+  color: var(--color-slate-800);
+  margin-bottom: 0.5rem;
+}
+
+.editor__hero-dragHolder-content-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.editor__hero-dragHolder-content-input-btn {
+  width: 100%;
+  font-size: var(--size-sm);
+  color: var(--color-slate-600);
+}
+
+.editor__hero-dragHolder-content-input-btn::file-selector-button {
+  border: 1px solid var(--color-slate-600);
+  font-size: var(--size-sm);
+  font-family: inherit;
+  border-radius: 6px;
+  color: var(--color-slate-600);
+  padding: 0.125em 0.25em;
+}
+
+/* input field end */
+
+.editor__hero-dragHolder-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dragHolder-img-count {
+  background-color: var(--color-slate-600);
+  color: var(--color-slate-50);
+  font-size: var(--size-sm);
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+}
+
+.dragHolder__add-btn {
+  position: absolute;
+  bottom: 0.2rem;
+  right: 0.2rem;
+  pointer-events: none;
+  opacity: 0.5;
+  font-size: var(--size-xs);
+  transition: color 0.3s;
+}
+
+.dragHolder__add-btn:hover {
+  color: var(--color-slate-800);
+}
+
+/* dragholder end */
+
 .editor__hero-wrapper {
-  height: 360px;
+  height: var(--editor-wrapper-size);
   border: 1px solid var(--color-slate-400);
   border-radius: 6px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
 }
 
 .editor__hero-list {
@@ -22,6 +199,7 @@
   justify-content: start;
   align-items: flex-end;
   position: relative;
+  margin-bottom: 0.5rem;
 }
 
 .editor__hero-list {
@@ -32,10 +210,42 @@
   display: flex;
 }
 
+.editor__hero-zero-img {
+  text-align: center;
+  font-size: var(--size-sm);
+  color: var(--color-slate-800);
+  font-weight: 500;
+  padding: 0.2em;
+  display: none;
+  width: 100%;
+  height: calc(var(--editor-wrapper-size) / 2);
+  position: absolute;
+  opacity: 0;
+}
+
+.editor__hero-zero-img.check:not(
+    :has(~ .editor__hero-list.not-placeholder-list .editor__hero-item)
+  ) {
+  display: block;
+  opacity: 1;
+}
+
 .editor__hero-btn-add {
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
+  transition: color 0.3s;
+}
+
+.editor__hero-btn-add:hover {
+  color: var(--color-slate-800);
+}
+
+.editor__hero-img-counter {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  pointer-events: none;
 }
 
 .editor__hero-item {
@@ -49,8 +259,11 @@
 
 .editor__hero-item button {
   position: absolute;
-  top: 0.2rem;
-  right: 0.2rem;
+  top: 0rem;
+  right: 0rem;
+  color: var(--color-red-600);
+  border: none;
+  background-color: var(--color-slate-50);
 }
 
 .editor__hero-item img {
@@ -60,10 +273,173 @@
   border-radius: 6px;
 }
 
-/* .editor__hero-img {
+.loader {
   display: none;
+  width: 100dvw;
+  height: 100dvh;
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
-.editor__hero-placeholder-img {
-  display: block;
+/* xs */
+@media (min-width: 475px) {
+  .editor__hero {
+    --editor-wrapper-size: 360px;
+    --dragable-size: 300px;
+  }
+
+  .editor__hero-title {
+    font-size: var(--size-3xl);
+  }
+
+  .editor__hero-dragHolder-title {
+    font-size: var(--size-base);
+  }
+  .dragHolder__close-btn {
+    font-size: var(--size-sm);
+  }
+
+  .dragHolder__resize-required {
+    font-size: var(--size-sm);
+  }
+  .dragHolder__resize-required span {
+    width: var(--size-3xl);
+  }
+
+  .editor__hero-dragHolder-content-input::before {
+    font-size: var(--size-base);
+  }
+
+  .editor__hero-dragHolder-content-input-btn {
+    font-size: var(--size-base);
+  }
+
+  .editor__hero-dragHolder-content-input-btn::file-selector-button {
+    font-size: var(--size-base);
+  }
+
+  .dragHolder-img-count {
+    font-size: var(--size-base);
+  }
+
+  .dragHolder__add-btn {
+    font-size: var(--size-sm);
+  }
+
+  .editor__hero-zero-img {
+    font-size: var(--size-base);
+  }
+}
+
+/* sm */
+/* @media (min-width: 640px) {
+} */
+
+/* md */
+/* @media (min-width: 768px) {
+} */
+
+/* lg */
+@media (min-width: 1024px) {
+  .editor__hero {
+    --editor-wrapper-size: 360px;
+    --dragable-size: 350px;
+  }
+
+  .editor__hero-title {
+    font-size: var(--size-4xl);
+  }
+
+  .editor__hero-dragHolder-title {
+    font-size: var(--size-lg);
+  }
+  .dragHolder__close-btn {
+    font-size: var(--size-base);
+  }
+
+  .dragHolder__resize-required {
+    font-size: var(--size-base);
+  }
+  .dragHolder__resize-required span {
+    width: var(--size-4xl);
+  }
+
+  .editor__hero-dragHolder-content-input::before {
+    font-size: var(--size-lg);
+  }
+
+  .editor__hero-dragHolder-content-input-btn {
+    font-size: var(--size-lg);
+  }
+
+  .editor__hero-dragHolder-content-input-btn::file-selector-button {
+    font-size: var(--size-lg);
+  }
+
+  .dragHolder-img-count {
+    font-size: var(--size-lg);
+  }
+
+  .dragHolder__add-btn {
+    font-size: var(--size-base);
+  }
+
+  .editor__hero-zero-img {
+    font-size: var(--size-lg);
+  }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  .editor__hero {
+    --dragable-size: 400px;
+  }
+
+  .editor__hero-title {
+    font-size: var(--size-5xl);
+  }
+
+  .editor__hero-dragHolder-title {
+    font-size: var(--size-xl);
+  }
+  .dragHolder__close-btn {
+    font-size: var(--size-lg);
+  }
+
+  .dragHolder__resize-required {
+    font-size: var(--size-lg);
+  }
+  .dragHolder__resize-required span {
+    width: var(--size-5xl);
+  }
+
+  .editor__hero-dragHolder-content-input::before {
+    font-size: var(--size-xl);
+  }
+
+  .editor__hero-dragHolder-content-input-btn {
+    font-size: var(--size-xl);
+  }
+
+  .editor__hero-dragHolder-content-input-btn::file-selector-button {
+    font-size: var(--size-xl);
+  }
+
+  .dragHolder-img-count {
+    font-size: var(--size-xl);
+  }
+
+  .dragHolder__add-btn {
+    font-size: var(--size-lg);
+  }
+
+  .editor__hero-zero-img {
+    font-size: var(--size-xl);
+  }
+}
+
+/* 2xl */
+/* @media (min-width: 1536px) {
 } */

@@ -26,6 +26,8 @@
         </form>
       </div>
     </section>
+    <!-- loader -->
+    <section class="loader"></section>
     <!-- Dashboard -->
     <main class="dashboard">
       <section class="hero container section">
@@ -39,12 +41,58 @@
           </div>
           <button class="hero__logout-btn btn">Logout</button>
         </div>
-        <div class="hero__views">Views <span>0</span></div>
+        <div class="hero__views">
+          <div>Views</div>
+          <div>0</div>
+        </div>
       </section>
       <section class="editor__hero section container">
         <h2 class="editor__hero-title">Hero Images</h2>
+        <div class="editor__hero-dragHolder-wrapper">
+          <div class="editor__hero-dragHolder">
+            <div class="editor__hero-dragHolder-title">
+              Drag & Drop Img
+              <button class="dragHolder__close-btn btn">Close</button>
+            </div>
+            <div class="editor__hero-dragHolder-content">
+              <svg
+                width="800px"
+                height="800px"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="drag__svg"
+              >
+                <g>
+                  <path fill="none" d="M0 0h24v24H0z" />
+                  <path
+                    fill-rule="nonzero"
+                    d="M14 6h2v2h5a1 1 0 0 1 1 1v7.5L16 13l.036 8.062 2.223-2.15L20.041 22H9a1 1 0 0 1-1-1v-5H6v-2h2V9a1 1 0 0 1 1-1h5V6zm8 11.338V21a1 1 0 0 1-.048.307l-1.96-3.394L22 17.338zM4 14v2H2v-2h2zm0-4v2H2v-2h2zm0-4v2H2V6h2zm0-4v2H2V2h2zm4 0v2H6V2h2zm4 0v2h-2V2h2zm4 0v2h-2V2h2z"
+                  />
+                </g>
+              </svg>
+            </div>
+            <div class="editor__hero-dragHolder-content-input">
+              <input
+                type="file"
+                class="editor__hero-dragHolder-content-input-btn"
+                accept="image/*"
+                multiple
+              />
+            </div>
+
+            <div class="editor__hero-dragHolder-footer">
+              <div class="dragHolder-img-count">0</div>
+              <button class="dragHolder__add-btn btn">Add</button>
+            </div>
+          </div>
+        </div>
         <div class="editor__hero-wrapper">
           <button class="editor__hero-btn-add btn">Add</button>
+          <button class="editor__hero-img-counter btn">0</button>
+          <div class="editor__hero-zero-img">
+            No images here, press the add button to add images
+          </div>
           <div class="editor__hero-list placeholder-list">
             <div class="editor__hero-item">
               <img
