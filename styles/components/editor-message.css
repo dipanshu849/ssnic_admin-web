@@ -1,16 +1,16 @@
-.editor__hero {
+.editor__msg {
   --editor-wrapper-size: 360px;
   --dragable-size: 250px;
 }
 
-.editor__hero-title {
+.editor__msg-title {
   font-size: var(--size-2xl);
   color: var(--color-slate-800);
   margin-bottom: 0.5rem;
 }
 
 /* dragHolder start */
-.editor__hero-dragHolder-wrapper {
+.editor__msg-dragHolder-wrapper {
   display: none;
   position: fixed;
   inset: 0;
@@ -18,7 +18,7 @@
   backdrop-filter: blur(5px);
 }
 
-.editor__hero-dragHolder {
+.editor__msg-dragHolder {
   background-color: var(--color-slate-50);
   position: absolute;
   top: 50%;
@@ -36,7 +36,7 @@
   z-index: 999;
 }
 
-.editor__hero-dragHolder-title {
+.editor__msg-dragHolder-title {
   font-size: var(--size-sm);
   color: var(--color-slate-600);
   font-weight: 500;
@@ -45,14 +45,14 @@
   margin-top: 0.5rem;
 }
 
-.editor__hero-dragHolder__close-btn {
+.dragHolder__close-btn {
   position: absolute;
   top: 0.2rem;
   right: 0.2rem;
   font-size: var(--size-xs);
 }
 
-.editor__hero-dragHolder-content {
+.editor__msg-dragHolder-content {
   height: var(--dragable-size);
   aspect-ratio: 1;
   border: 1px solid var(--color-slate-600);
@@ -65,7 +65,7 @@
   overflow-y: hidden;
 }
 
-.editor__hero-dragHolder-content svg {
+.editor__msg-dragHolder-content svg {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -76,11 +76,11 @@
   color: var(--color-slate-600);
 }
 
-.editor__hero-dragHolder-content svg:has(+ .dragHolder__img-item) {
+.editor__msg-dragHolder-content svg:has(+ .dragHolder__img-item) {
   display: none;
 }
 
-.editor__hero-dragHolder__img-item {
+.dragHolder__img-item {
   position: relative;
   min-width: 100%;
   height: 100%;
@@ -88,7 +88,7 @@
   margin-right: 0.5rem;
 }
 
-.editor__hero-dragHolder__img-item img {
+.dragHolder__img-item img {
   min-width: 100%;
   height: 100%;
   object-fit: cover;
@@ -96,7 +96,7 @@
   margin-right: 0.5rem;
 }
 
-.editor__hero-dragHolder__resize-required {
+.dragHolder__resize-required {
   position: absolute;
   top: 0.2rem;
   left: 0.2rem;
@@ -108,20 +108,20 @@
   font-weight: 500;
 }
 
-.editor__hero-dragHolder__resize-required span {
+.dragHolder__resize-required span {
   display: inline-block;
   width: var(--size-2xl);
 }
 
 /* input field start*/
-.editor__hero-dragHolder-content-input::before {
+.editor__msg-dragHolder-content-input::before {
   content: "or";
   font-size: var(--size-sm);
   color: var(--color-slate-800);
   margin-bottom: 0.5rem;
 }
 
-.editor__hero-dragHolder-content-input {
+.editor__msg-dragHolder-content-input {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -129,13 +129,13 @@
   align-items: center;
 }
 
-.editor__hero-dragHolder-content-input-btn {
+.editor__msg-dragHolder-content-input-btn {
   width: 100%;
   font-size: var(--size-sm);
   color: var(--color-slate-600);
 }
 
-.editor__hero-dragHolder-content-input-btn::file-selector-button {
+.editor__msg-dragHolder-content-input-btn::file-selector-button {
   border: 1px solid var(--color-slate-600);
   font-size: var(--size-sm);
   font-family: inherit;
@@ -146,14 +146,14 @@
 
 /* input field end */
 
-.editor__hero-dragHolder-footer {
+.editor__msg-dragHolder-footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.editor__hero-dragHolder-img-count {
+.dragHolder-img-count {
   background-color: var(--color-slate-600);
   color: var(--color-slate-50);
   font-size: var(--size-sm);
@@ -161,7 +161,7 @@
   border-radius: 6px;
 }
 
-.editor__hero-dragHolder__add-btn {
+.dragHolder__add-btn {
   position: absolute;
   bottom: 0.2rem;
   right: 0.2rem;
@@ -171,13 +171,13 @@
   transition: color 0.3s;
 }
 
-.editor__hero-dragHolder__add-btn:hover {
+.dragHolder__add-btn:hover {
   color: var(--color-slate-800);
 }
 
 /* dragholder end */
 
-.editor__hero-wrapper {
+.editor__msg-wrapper {
   height: var(--editor-wrapper-size);
   border: 1px solid var(--color-slate-400);
   border-radius: 6px;
@@ -188,7 +188,7 @@
   position: relative;
 }
 
-.editor__hero-list {
+.editor__msg-list {
   height: 300px;
   overflow-y: hidden;
   overflow-x: auto;
@@ -199,15 +199,15 @@
   margin-bottom: 0.5rem;
 }
 
-.editor__hero-list {
+.editor__msg-list {
   display: none;
 }
 
-.editor__hero-list.placeholder-list {
+.editor__msg-list.placeholder-list {
   display: flex;
 }
 
-.editor__hero-zero-img {
+.editor__msg-zero-img {
   text-align: center;
   font-size: var(--size-sm);
   color: var(--color-slate-800);
@@ -220,32 +220,32 @@
   opacity: 0;
 }
 
-.editor__hero-zero-img.check:not(
-    :has(~ .editor__hero-list.not-placeholder-list .editor__hero-item)
+.editor__msg-zero-img.check:not(
+    :has(~ .editor__msg-list.not-placeholder-list .editor__msg-item)
   ) {
   display: block;
   opacity: 1;
 }
 
-.editor__hero-btn-add {
+.editor__msg-btn-add {
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
   transition: color 0.3s;
 }
 
-.editor__hero-btn-add:hover {
+.editor__msg-btn-add:hover {
   color: var(--color-slate-800);
 }
 
-.editor__hero-img-counter {
+.editor__msg-img-counter {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
   pointer-events: none;
 }
 
-.editor__hero-item {
+.editor__msg-item {
   border: 1px solid var(--color-slate-400);
   border-radius: 6px;
   height: 300px;
@@ -254,7 +254,7 @@
   position: relative;
 }
 
-.editor__hero-item button {
+.editor__msg-item button {
   position: absolute;
   top: 0rem;
   right: 0rem;
@@ -263,7 +263,7 @@
   background-color: var(--color-slate-50);
 }
 
-.editor__hero-item img {
+.editor__msg-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -282,161 +282,161 @@
 
 /* xs */
 @media (min-width: 475px) {
-  .editor__hero {
+  .editor__msg {
     --editor-wrapper-size: 360px;
     --dragable-size: 300px;
   }
 
-  .editor__hero-title {
+  .editor__msg-title {
     font-size: var(--size-3xl);
   }
 
-  .editor__hero-dragHolder-title {
+  .editor__msg-dragHolder-title {
     font-size: var(--size-base);
   }
-  .editor__hero-dragHolder__close-btn {
+  .dragHolder__close-btn {
     font-size: var(--size-sm);
   }
 
-  .editor__hero-dragHolder__resize-required {
+  .dragHolder__resize-required {
     font-size: var(--size-sm);
   }
-  .editor__hero-dragHolder__resize-required span {
+  .dragHolder__resize-required span {
     width: var(--size-3xl);
   }
 
-  .editor__hero-dragHolder-content-input::before {
+  .editor__msg-dragHolder-content-input::before {
     font-size: var(--size-base);
   }
 
-  .editor__hero-dragHolder-content-input-btn {
+  .editor__msg-dragHolder-content-input-btn {
     font-size: var(--size-base);
   }
 
-  .editor__hero-dragHolder-content-input-btn::file-selector-button {
+  .editor__msg-dragHolder-content-input-btn::file-selector-button {
     font-size: var(--size-base);
   }
 
-  .editor__hero-dragHolder-img-count {
+  .dragHolder-img-count {
     font-size: var(--size-base);
   }
 
-  .editor__hero-dragHolder__add-btn {
+  .dragHolder__add-btn {
     font-size: var(--size-sm);
   }
 
-  .editor__hero-zero-img {
+  .editor__msg-zero-img {
     font-size: var(--size-base);
   }
 }
 
 /* sm */
 /* @media (min-width: 640px) {
-} */
+    } */
 
 /* md */
 /* @media (min-width: 768px) {
-} */
+    } */
 
 /* lg */
 @media (min-width: 1024px) {
-  .editor__hero {
+  .editor__msg {
     --editor-wrapper-size: 360px;
     --dragable-size: 350px;
   }
 
-  .editor__hero-title {
+  .editor__msg-title {
     font-size: var(--size-4xl);
   }
 
-  .editor__hero-dragHolder-title {
+  .editor__msg-dragHolder-title {
     font-size: var(--size-lg);
   }
-  .editor__hero-dragHolder__close-btn {
+  .dragHolder__close-btn {
     font-size: var(--size-base);
   }
 
-  .editor__hero-dragHolder__resize-required {
+  .dragHolder__resize-required {
     font-size: var(--size-base);
   }
-  .editor__hero-dragHolder__resize-required span {
+  .dragHolder__resize-required span {
     width: var(--size-4xl);
   }
 
-  .editor__hero-dragHolder-content-input::before {
+  .editor__msg-dragHolder-content-input::before {
     font-size: var(--size-lg);
   }
 
-  .editor__hero-dragHolder-content-input-btn {
+  .editor__msg-dragHolder-content-input-btn {
     font-size: var(--size-lg);
   }
 
-  .editor__hero-dragHolder-content-input-btn::file-selector-button {
+  .editor__msg-dragHolder-content-input-btn::file-selector-button {
     font-size: var(--size-lg);
   }
 
-  .editor__hero-dragHolder-img-count {
+  .dragHolder-img-count {
     font-size: var(--size-lg);
   }
 
-  .editor__hero-dragHolder__add-btn {
+  .dragHolder__add-btn {
     font-size: var(--size-base);
   }
 
-  .editor__hero-zero-img {
+  .editor__msg-zero-img {
     font-size: var(--size-lg);
   }
 }
 
 /* xl */
 @media (min-width: 1280px) {
-  .editor__hero {
+  .editor__msg {
     --dragable-size: 400px;
   }
 
-  .editor__hero-title {
+  .editor__msg-title {
     font-size: var(--size-5xl);
   }
 
-  .editor__hero-dragHolder-title {
+  .editor__msg-dragHolder-title {
     font-size: var(--size-xl);
   }
-  .editor__hero-dragHolder__close-btn {
+  .dragHolder__close-btn {
     font-size: var(--size-lg);
   }
 
-  .editor__hero-dragHolder__resize-required {
+  .dragHolder__resize-required {
     font-size: var(--size-lg);
   }
-  .editor__hero-dragHolder__resize-required span {
+  .dragHolder__resize-required span {
     width: var(--size-5xl);
   }
 
-  .editor__hero-dragHolder-content-input::before {
+  .editor__msg-dragHolder-content-input::before {
     font-size: var(--size-xl);
   }
 
-  .editor__hero-dragHolder-content-input-btn {
+  .editor__msg-dragHolder-content-input-btn {
     font-size: var(--size-xl);
   }
 
-  .editor__hero-dragHolder-content-input-btn::file-selector-button {
+  .editor__msg-dragHolder-content-input-btn::file-selector-button {
     font-size: var(--size-xl);
   }
 
-  .editor__hero-dragHolder-img-count {
+  .dragHolder-img-count {
     font-size: var(--size-xl);
   }
 
-  .editor__hero-dragHolder__add-btn {
+  .dragHolder__add-btn {
     font-size: var(--size-lg);
   }
 
-  .editor__hero-zero-img {
+  .editor__msg-zero-img {
     font-size: var(--size-xl);
   }
 }
 
 /* 2xl */
 /* @media (min-width: 1536px) {
-} */
+    } */

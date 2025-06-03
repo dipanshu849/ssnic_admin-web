@@ -1,17 +1,19 @@
 import { supabase } from "../supabaseClient";
-import getHeroImgs from ".././backend/hero-data";
-import imageResize from "../utils/img-downsize";
+import getImgs from "./get-data";
 import Compressor from "compressorjs";
 
-const drapDrop = () => {
-  const openBtn = document.querySelector(".editor__hero-btn-add");
-  const closeBtn = document.querySelector(".dragHolder__close-btn");
-  const dragHolder = document.querySelector(".editor__hero-dragHolder-wrapper");
+const drapDrop = (type, folder) => {
+  const suffix = `editor__${type}`;
+  const openBtn = document.querySelector(`.${suffix}-btn-add`);
+  const closeBtn = document.querySelector(`.${suffix}-dragHolder__close-btn`);
+  const dragHolder = document.querySelector(`.${suffix}-dragHolder-wrapper`);
   const dragHolderContent = document.querySelector(
-    ".editor__hero-dragHolder-content"
+    `.${suffix}-dragHolder-content`
   );
-  const imgCounter = document.querySelector(".dragHolder-img-count");
-  const imgFinalAddBtn = document.querySelector(".dragHolder__add-btn");
+  const imgCounter = document.querySelector(`.${suffix}-dragHolder-img-count`);
+  const imgFinalAddBtn = document.querySelector(
+    `.${suffix}-dragHolder__add-btn`
+  );
 
   const listOfResizedImgs = [];
 
@@ -19,11 +21,13 @@ const drapDrop = () => {
 
   openBtn.addEventListener("click", () => {
     dragHolder.style.display = "block";
+    document.body.style.overflowY = "hidden";
     imgCounter.textContent = 0;
   });
 
   closeBtn.addEventListener("click", () => {
     dragHolder.style.display = "none";
+    document.body.style.overflowY = "auto";
     imgCounter.textContent = 0;
     removeAllDisplayedImages();
   });
@@ -68,21 +72,18 @@ const drapDrop = () => {
         reader.readAsDataURL(file);
         await new Promise((resolve, reject) => {
           reader.onload = (event) => {
-            console.log("HERE 4-1");
             newImg.src = event.target.result;
             newImg.dataset.src = file.name; // store the file name for later use
-            newImg.alt = "Hero Image " + (index + 1);
+            newImg.alt = `${type} Image ` + (index + 1);
             const resizedDivItem = document.createElement("div");
-            resizedDivItem.className = "dragHolder__img-item";
-            console.log("HERE 4-2");
+            resizedDivItem.className = `${suffix}-dragHolder__img-item`;
 
-            resizedDivItem.innerHTML = `<img class="dragHolder__img" src="${newImg.src}" alt="${newImg.alt}" />
-             <div class="dragHolder__resize-required"></div>`;
+            resizedDivItem.innerHTML = `<img class="${suffix}-dragHolder__img" src="${newImg.src}" alt="${newImg.alt}" />
+             <div class="${suffix}-dragHolder__resize-required"></div>`;
             dragHolderContent.appendChild(resizedDivItem);
 
             imgFinalAddBtn.style.pointerEvents = "auto";
             imgFinalAddBtn.style.opacity = "1";
-            console.log("HERE 4-3");
             resolve();
           };
           reader.onerror = (err) => {
@@ -100,7 +101,7 @@ const drapDrop = () => {
 
           readTheFile(compressedFile).then(() => {
             const resizeText = document.querySelector(
-              ".dragHolder__img-item:last-child .dragHolder__resize-required"
+              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
             );
             if (compressedFile.size === file.size) {
               resizeText.replaceChildren();
@@ -116,7 +117,7 @@ const drapDrop = () => {
           listOfResizedImgs.push([file.name, file]);
           readTheFile(file).then(() => {
             const resizeText = document.querySelector(
-              ".dragHolder__img-item:last-child .dragHolder__resize-required"
+              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
             );
             resizeText.replaceChildren();
             resizeText.innerHTML = "<span>&#10060;</span> Not resized";
@@ -134,7 +135,7 @@ const drapDrop = () => {
 
   // ------------------------------------------------- BELOW CODE HANDLE INPUT TYPE FILE
   const inputFileBtn = document.querySelector(
-    ".editor__hero-dragHolder-content-input-btn"
+    `.${suffix}-dragHolder-content-input-btn`
   );
 
   inputFileBtn.addEventListener("change", () => {
@@ -153,21 +154,18 @@ const drapDrop = () => {
         reader.readAsDataURL(file);
         await new Promise((resolve, reject) => {
           reader.onload = (event) => {
-            console.log("HERE 4-1");
             newImg.src = event.target.result;
             newImg.dataset.src = file.name; // store the file name for later use
-            newImg.alt = "Hero Image " + (index + 1);
+            newImg.alt = `${type} Image ` + (index + 1);
             const resizedDivItem = document.createElement("div");
-            resizedDivItem.className = "dragHolder__img-item";
-            console.log("HERE 4-2");
+            resizedDivItem.className = `${suffix}-dragHolder__img-item`;
 
-            resizedDivItem.innerHTML = `<img class="dragHolder__img" src="${newImg.src}" alt="${newImg.alt}" />
-             <div class="dragHolder__resize-required"></div>`;
+            resizedDivItem.innerHTML = `<img class="${suffix}-dragHolder__img" src="${newImg.src}" alt="${newImg.alt}" />
+             <div class="${suffix}-dragHolder__resize-required"></div>`;
             dragHolderContent.appendChild(resizedDivItem);
 
             imgFinalAddBtn.style.pointerEvents = "auto";
             imgFinalAddBtn.style.opacity = "1";
-            console.log("HERE 4-3");
             resolve();
           };
           reader.onerror = (err) => {
@@ -185,7 +183,7 @@ const drapDrop = () => {
 
           readTheFile(compressedFile).then(() => {
             const resizeText = document.querySelector(
-              ".dragHolder__img-item:last-child .dragHolder__resize-required"
+              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
             );
             if (compressedFile.size === file.size) {
               resizeText.replaceChildren();
@@ -201,7 +199,7 @@ const drapDrop = () => {
           listOfResizedImgs.push([file.name, file]);
           readTheFile(file).then(() => {
             const resizeText = document.querySelector(
-              ".dragHolder__img-item:last-child .dragHolder__resize-required"
+              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
             );
             resizeText.replaceChildren();
             resizeText.innerHTML = "<span>&#10060;</span> Not resized";
@@ -214,20 +212,14 @@ const drapDrop = () => {
   // -------------------------------------- BELOW CODE IS AFTER RECEIVING RESIZED IMAGE
 
   const uploadImages = async (listOfResizedImgs) => {
-    console.log("Uploading images...");
     let counter = 1;
     for (const resizedImg of listOfResizedImgs) {
-      console.log(counter);
-      console.log("Uploading image: ", resizedImg[0]);
-      console.log("DURING UPLOADING:");
-      console.log("RESIZED IMG FILE: ", resizedImg[1]);
       const { data, error } = await supabase.storage
-        .from("hero-img")
-        .upload("public/" + resizedImg[0], resizedImg[1], {
+        .from("home")
+        .upload(`${folder}/` + resizedImg[0], resizedImg[1], {
           cacheControl: "3600",
           upsert: true,
         });
-      console.log("END", counter);
       counter++;
     }
   };
@@ -237,8 +229,7 @@ const drapDrop = () => {
     document.body.style.overflow = "hidden";
 
     uploadImages(listOfResizedImgs).then(() => {
-      console.log("All images uploaded successfully.");
-      getHeroImgs();
+      getImgs(type, folder);
       loader.style.display = "none";
       document.body.style.overflow = "auto";
     });
