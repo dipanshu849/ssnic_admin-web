@@ -1,0 +1,107 @@
+.editor__montly-calender-container {
+  display: none;
+  position: fixed;
+  inset: 0;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+#calendar__monthly {
+  width: 330px;
+  height: 250px;
+}
+
+.vc {
+  z-index: 99;
+  border-radius: 6px !important;
+}
+
+.vc-header__content button {
+  color: var(--color-slate-800) !important;
+  font-size: var(--size-sm);
+}
+
+.vc-months__month {
+  outline: none !important;
+  font-size: var(--size-xs) !important;
+  color: var(--color-slate-500) !important;
+}
+
+.vc-months__month[aria-selected="true"] {
+  background-color: var(--color-slate-600) !important;
+  color: var(--color-slate-50) !important;
+}
+
+/* xs */
+@media (min-width: 475px) {
+  #calendar__monthly::before {
+    font-size: var(--size-base);
+  }
+
+  #calendar__monthly {
+    width: 350px;
+    height: 270px;
+  }
+
+  .vc-header__content button {
+    font-size: var(--size-base);
+  }
+
+  .vc-months__month {
+    font-size: var(--size-sm) !important;
+  }
+}
+
+/* sm */
+/* @media (min-width: 640px) {
+} */
+
+/* md */
+/* @media (min-width: 768px) {
+} */
+
+/* lg */
+@media (min-width: 1024px) {
+  #calendar__monthly::before {
+    font-size: var(--size-lg);
+  }
+
+  #calendar__monthly {
+    width: 370px;
+    height: 290px;
+  }
+
+  .vc-header__content button {
+    font-size: var(--size-lg);
+  }
+
+  .vc-months__month {
+    font-size: var(--size-base) !important;
+  }
+}
+
+/* xl */
+@media (min-width: 1280px) {
+  #calendar__monthly::before {
+    font-size: var(--size-xl);
+  }
+
+  #calendar__monthly {
+    width: 390px;
+    height: 310px;
+  }
+
+  .vc-header__content button {
+    font-size: var(--size-xl);
+  }
+
+  .vc-months__month {
+    font-size: var(--size-lg) !important;
+  }
+}
+
+/* 2xl */
+/* @media (min-width: 1536px) {
+} */

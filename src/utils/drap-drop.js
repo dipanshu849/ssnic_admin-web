@@ -2,37 +2,47 @@ import { supabase } from "../supabaseClient";
 import getImgs from "./get-data";
 import Compressor from "compressorjs";
 
-const drapDrop = (type, folder) => {
-  const suffix = `editor__${type}`;
-  const openBtn = document.querySelector(`.${suffix}-btn-add`);
-  const closeBtn = document.querySelector(`.${suffix}-dragHolder__close-btn`);
-  const dragHolder = document.querySelector(`.${suffix}-dragHolder-wrapper`);
+const drapDrop = (type, folder, subfolder = null, bucket = "home") => {
+  // ------------------------------- VARIABLES
+  const path = subfolder ? `${folder}/${subfolder[0]}/${subfolder[1]}` : folder;
+  const openBtn = document.querySelector(`.editor__btn-add.${type}`);
+  const closeBtn = document.querySelector(
+    `.editor__dragHolder__close-btn.${type}`
+  );
+  const dragHolder = document.querySelector(
+    `.editor__dragHolder-wrapper.${type}`
+  );
   const dragHolderContent = document.querySelector(
-    `.${suffix}-dragHolder-content`
+    `.editor__dragHolder-content.${type}`
   );
-  const imgCounter = document.querySelector(`.${suffix}-dragHolder-img-count`);
+  const imgCounter = document.querySelector(
+    `.editor__dragHolder-img-count.${type}`
+  );
   const imgFinalAddBtn = document.querySelector(
-    `.${suffix}-dragHolder__add-btn`
+    `.editor__dragHolder__add-btn.${type}`
   );
-
+  const inputFileBtn = document.querySelector(
+    `.editor__dragHolder-content-input-btn.${type}`
+  );
   const listOfResizedImgs = [];
-
   const loader = document.querySelector(".loader");
+  // ------------------------------------------------- END OF VARIABLES
 
-  openBtn.addEventListener("click", () => {
+  // ------------------------------ FUNCTIONS
+  function handleClickOpenBtn() {
     dragHolder.style.display = "block";
     document.body.style.overflowY = "hidden";
     imgCounter.textContent = 0;
-  });
+  }
 
-  closeBtn.addEventListener("click", () => {
+  function handleClickCloseBtn() {
     dragHolder.style.display = "none";
     document.body.style.overflowY = "auto";
     imgCounter.textContent = 0;
     removeAllDisplayedImages();
-  });
+  }
 
-  const removeAllDisplayedImages = () => {
+  function removeAllDisplayedImages() {
     dragHolderContent.replaceChildren();
     dragHolderContent.innerHTML = `
     <svg
@@ -51,9 +61,9 @@ const drapDrop = (type, folder) => {
                   />
                 </g>
               </svg>`;
-  };
+  }
 
-  const dropHandler = (e) => {
+  function dropHandler(e) {
     e.preventDefault();
 
     const imgType = /image.*/;
@@ -76,10 +86,10 @@ const drapDrop = (type, folder) => {
             newImg.dataset.src = file.name; // store the file name for later use
             newImg.alt = `${type} Image ` + (index + 1);
             const resizedDivItem = document.createElement("div");
-            resizedDivItem.className = `${suffix}-dragHolder__img-item`;
+            resizedDivItem.className = `editor__dragHolder__img-item ${type}`;
 
-            resizedDivItem.innerHTML = `<img class="${suffix}-dragHolder__img" src="${newImg.src}" alt="${newImg.alt}" />
-             <div class="${suffix}-dragHolder__resize-required"></div>`;
+            resizedDivItem.innerHTML = `<img class="editor__dragHolder__img ${type}" src="${newImg.src}" alt="${newImg.alt}" />
+             <div class="editor__dragHolder__resize-required ${type}"></div>`;
             dragHolderContent.appendChild(resizedDivItem);
 
             imgFinalAddBtn.style.pointerEvents = "auto";
@@ -101,7 +111,7 @@ const drapDrop = (type, folder) => {
 
           readTheFile(compressedFile).then(() => {
             const resizeText = document.querySelector(
-              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
+              `.editor__dragHolder__img-item.${type}:last-child .editor__dragHolder__resize-required.${type}`
             );
             if (compressedFile.size === file.size) {
               resizeText.replaceChildren();
@@ -117,7 +127,7 @@ const drapDrop = (type, folder) => {
           listOfResizedImgs.push([file.name, file]);
           readTheFile(file).then(() => {
             const resizeText = document.querySelector(
-              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
+              `.editor__dragHolder__img-item.${type}:last-child .editor__dragHolder__resize-required.${type}`
             );
             resizeText.replaceChildren();
             resizeText.innerHTML = "<span>&#10060;</span> Not resized";
@@ -125,22 +135,14 @@ const drapDrop = (type, folder) => {
         },
       });
     });
-  };
+  }
 
-  const dragOverHandler = (e) => {
+  function dragOverHandler(e) {
     e.preventDefault(); // prevent from opening file
-  };
-  dragHolderContent.addEventListener("drop", dropHandler);
-  dragHolderContent.addEventListener("dragover", dragOverHandler);
+  }
 
-  // ------------------------------------------------- BELOW CODE HANDLE INPUT TYPE FILE
-  const inputFileBtn = document.querySelector(
-    `.${suffix}-dragHolder-content-input-btn`
-  );
-
-  inputFileBtn.addEventListener("change", () => {
+  function handleInputFileBtnClick() {
     const selectedFiles = inputFileBtn.files;
-    console.log("Selected files: ", selectedFiles);
 
     [...selectedFiles].forEach((file, index) => {
       const newImg = document.createElement("img");
@@ -158,10 +160,10 @@ const drapDrop = (type, folder) => {
             newImg.dataset.src = file.name; // store the file name for later use
             newImg.alt = `${type} Image ` + (index + 1);
             const resizedDivItem = document.createElement("div");
-            resizedDivItem.className = `${suffix}-dragHolder__img-item`;
+            resizedDivItem.className = `editor__dragHolder__img-item.${type}`;
 
-            resizedDivItem.innerHTML = `<img class="${suffix}-dragHolder__img" src="${newImg.src}" alt="${newImg.alt}" />
-             <div class="${suffix}-dragHolder__resize-required"></div>`;
+            resizedDivItem.innerHTML = `<img class="editor__dragHolder__img.${type}" src="${newImg.src}" alt="${newImg.alt}" />
+             <div class="editor__dragHolder__resize-required.${type}"></div>`;
             dragHolderContent.appendChild(resizedDivItem);
 
             imgFinalAddBtn.style.pointerEvents = "auto";
@@ -183,7 +185,7 @@ const drapDrop = (type, folder) => {
 
           readTheFile(compressedFile).then(() => {
             const resizeText = document.querySelector(
-              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
+              `.editor__dragHolder__img-item.${type}:last-child .editor__dragHolder__resize-required.${type}`
             );
             if (compressedFile.size === file.size) {
               resizeText.replaceChildren();
@@ -199,7 +201,7 @@ const drapDrop = (type, folder) => {
           listOfResizedImgs.push([file.name, file]);
           readTheFile(file).then(() => {
             const resizeText = document.querySelector(
-              `.${suffix}-dragHolder__img-item:last-child .${suffix}-dragHolder__resize-required`
+              `.editor__dragHolder__img-item.${type}:last-child .editor__dragHolder__resize-required.${type}`
             );
             resizeText.replaceChildren();
             resizeText.innerHTML = "<span>&#10060;</span> Not resized";
@@ -207,34 +209,55 @@ const drapDrop = (type, folder) => {
         },
       });
     });
-  });
+  }
 
-  // -------------------------------------- BELOW CODE IS AFTER RECEIVING RESIZED IMAGE
-
-  const uploadImages = async (listOfResizedImgs) => {
+  async function uploadImages(listOfResizedImgs) {
     let counter = 1;
     for (const resizedImg of listOfResizedImgs) {
       const { data, error } = await supabase.storage
-        .from("home")
-        .upload(`${folder}/` + resizedImg[0], resizedImg[1], {
+        .from(`${bucket}`)
+        .upload(`${path}/` + resizedImg[0], resizedImg[1], {
           cacheControl: "3600",
           upsert: true,
         });
       counter++;
     }
-  };
+  }
 
-  imgFinalAddBtn.addEventListener("click", async () => {
+  async function handleClickUploadBtn() {
     loader.style.display = "block";
+    loader.style.pointerEvents = "all";
     document.body.style.overflow = "hidden";
 
     uploadImages(listOfResizedImgs).then(() => {
-      getImgs(type, folder);
+      getImgs(
+        type,
+        folder,
+        subfolder ? subfolder : null,
+        bucket ? bucket : "home"
+      );
       loader.style.display = "none";
+      loader.style.pointerEvents = "none";
       document.body.style.overflow = "auto";
     });
     closeBtn.click();
-  });
+  }
+
+  // ------------------------------------------------ END OF FUNCTIONS
+
+  openBtn.removeEventListener("click", handleClickOpenBtn);
+  closeBtn.removeEventListener("click", handleClickCloseBtn);
+  dragHolderContent.removeEventListener("drop", dropHandler);
+  dragHolderContent.removeEventListener("dragover", dragOverHandler);
+  inputFileBtn.removeEventListener("change", handleInputFileBtnClick);
+  imgFinalAddBtn.removeEventListener("click", handleClickUploadBtn);
+
+  openBtn.addEventListener("click", handleClickOpenBtn);
+  closeBtn.addEventListener("click", handleClickCloseBtn);
+  dragHolderContent.addEventListener("drop", dropHandler);
+  dragHolderContent.addEventListener("dragover", dragOverHandler);
+  inputFileBtn.addEventListener("change", handleInputFileBtnClick);
+  imgFinalAddBtn.addEventListener("click", handleClickUploadBtn);
 };
 
 export default drapDrop;

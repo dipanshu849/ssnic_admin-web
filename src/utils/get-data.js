@@ -1,15 +1,18 @@
 import { supabase } from "../supabaseClient";
 
-const getImgs = (type, folder) => {
-  const suffix = `editor__${type}`;
+const getImgs = (type, folder, subfolder = null, bucket = "home") => {
+  const path = subfolder ? `${folder}/${subfolder[0]}/${subfolder[1]}` : folder;
+
   const editor__List = document.querySelector(
-    `.${suffix}-list.not-placeholder-list`
+    `.editor__list.not-placeholder-list.${type}`
   );
   const editor__ListPlaceholder = document.querySelector(
-    `.${suffix}-list.placeholder-list`
+    `.editor__list.placeholder-list.${type}`
   );
 
-  const imgNumberDisplayer = document.querySelector(`.${suffix}-img-counter`);
+  const imgNumberDisplayer = document.querySelector(
+    `.editor__img-counter.${type}`
+  );
 
   const loader = document.querySelector(".loader");
 
@@ -26,8 +29,8 @@ const getImgs = (type, folder) => {
 
   const fetchImgs = async () => {
     const { data, error } = await supabase.storage
-      .from("home")
-      .list(`${folder}/`);
+      .from(`${bucket}`)
+      .list(`${path}/`);
     return data;
   };
 
@@ -39,8 +42,8 @@ const getImgs = (type, folder) => {
 
       Imgs.forEach((img, index) => {
         const { data } = supabase.storage
-          .from("home")
-          .getPublicUrl(`${folder}/` + img.name);
+          .from(`${bucket}`)
+          .getPublicUrl(`${path}/` + img.name);
         console.log(img.name);
         if (img.name == ".emptyFolderPlaceholder") {
           return;
@@ -48,18 +51,18 @@ const getImgs = (type, folder) => {
         if (imgUrl.indexOf(data.publicUrl) == -1) {
           imgUrl.push(data.publicUrl);
           const listItem = document.createElement("div");
-          listItem.className = `${suffix}-item`;
+          listItem.className = `editor__item ${type}`;
           listItem.innerHTML = `
-             <img class="${suffix}-img" src="${data.publicUrl}" data-src="${
-            img.name
-          }" alt="${type} Image ${index + 1}" />
-                <button class="${suffix}-btn-remove btn">Remove</button>
+             <img class="editor__img ${type}" src="${
+            data.publicUrl
+          }" data-src="${img.name}" alt="${type} Image ${index + 1}" />
+                <button class="editor__btn-remove ${type} btn">Remove</button>
           `;
           editor__List.appendChild(listItem);
         }
       });
 
-      const editor__ItemImg = document.querySelectorAll(`.${suffix}-img`);
+      const editor__ItemImg = document.querySelectorAll(`.editor__img.${type}`);
       imgNumberDisplayer.textContent = imgUrl.length;
 
       editor__ItemImg.forEach((img, index) => {
@@ -75,7 +78,7 @@ const getImgs = (type, folder) => {
       setIntervalId = setInterval(() => {
         if (imgCounter == imgUrl.length) {
           editor__ListPlaceholder.style.display = "none";
-          const message = document.querySelector(`.${suffix}-zero-img`);
+          const message = document.querySelector(`.editor__zero-img.${type}`);
           message.classList.add("check");
           editor__List.style.display = "flex";
           clearInterval(setIntervalId);
@@ -83,7 +86,7 @@ const getImgs = (type, folder) => {
 
           // ------------------------------- Below code to remove img
 
-          removeBtn = document.querySelectorAll(`.${suffix}-btn-remove`);
+          removeBtn = document.querySelectorAll(`.editor__btn-remove.${type}`);
           removeBtn.forEach((btn) => {
             if (!isSetIntervalRunning) {
               btn.addEventListener("click", async (e) => {
@@ -91,12 +94,17 @@ const getImgs = (type, folder) => {
                 document.body.style.overflow = "hidden";
                 const img = e.target.previousElementSibling;
 
-                const address = `${folder}/` + img.dataset.src;
+                const address = `${path}/` + img.dataset.src;
 
                 const { data, error } = await supabase.storage
-                  .from("home")
+                  .from(`${bucket}`)
                   .remove([`${address}`]);
-                getImgs(type, folder);
+                getImgs(
+                  type,
+                  folder,
+                  subfolder ? subfolder : null,
+                  bucket ? bucket : "home"
+                );
                 loader.style.display = "none";
                 document.body.style.overflow = "auto";
               });

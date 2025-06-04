@@ -28,6 +28,11 @@
     </section>
     <!-- loader -->
     <section class="loader"></section>
+    <!-- calender -->
+    <div class="editor__montly-calender-container">
+      <div id="calendar__monthly" class="editor__montly-calender"></div>
+    </div>
+
     <!-- Dashboard -->
     <main class="dashboard">
       <section class="hero container section">
@@ -47,17 +52,17 @@
         </div>
       </section>
       <!-- hero editor -->
-      <section class="editor__hero section container">
-        <h2 class="editor__hero-title">Hero Images</h2>
-        <div class="editor__hero-dragHolder-wrapper">
-          <div class="editor__hero-dragHolder">
-            <div class="editor__hero-dragHolder-title">
+      <section class="hero editor__hero section container">
+        <h2 class="hero editor__title">Hero Images</h2>
+        <div class="hero editor__dragHolder-wrapper">
+          <div class="hero editor__dragHolder">
+            <div class="hero editor__dragHolder-title">
               Drag & Drop Img
-              <button class="editor__hero-dragHolder__close-btn btn">
+              <button class="hero editor__dragHolder__close-btn btn">
                 Close
               </button>
             </div>
-            <div class="editor__hero-dragHolder-content">
+            <div class="hero editor__dragHolder-content">
               <svg
                 width="800px"
                 height="800px"
@@ -75,70 +80,70 @@
                 </g>
               </svg>
             </div>
-            <div class="editor__hero-dragHolder-content-input">
+            <div class="hero editor__dragHolder-content-input">
               <input
                 type="file"
-                class="editor__hero-dragHolder-content-input-btn"
+                class="hero editor__dragHolder-content-input-btn"
                 accept="image/*"
                 multiple
               />
             </div>
 
-            <div class="editor__hero-dragHolder-footer">
-              <div class="editor__hero-dragHolder-img-count">0</div>
-              <button class="editor__hero-dragHolder__add-btn btn">Add</button>
+            <div class="hero editor__dragHolder-footer">
+              <div class="hero editor__dragHolder-img-count">0</div>
+              <button class="hero editor__dragHolder__add-btn btn">Add</button>
             </div>
           </div>
         </div>
-        <div class="editor__hero-wrapper">
-          <button class="editor__hero-btn-add btn">Add</button>
-          <button class="editor__hero-img-counter btn">0</button>
-          <div class="editor__hero-zero-img">
+        <div class="hero editor__wrapper">
+          <button class="hero editor__btn-add btn">Add</button>
+          <button class="hero editor__img-counter btn">0</button>
+          <div class="hero editor__zero-img">
             No images here, press the add button to add images
           </div>
-          <div class="editor__hero-list placeholder-list">
-            <div class="editor__hero-item">
+          <div class="hero editor__list placeholder-list">
+            <div class="hero editor__item">
               <img
-                class="editor__hero-placeholder-img"
+                class="hero editor__placeholder-img"
                 src="https://placehold.co/800"
                 alt="Placeholder Image"
               />
-              <button class="editor__hero-btn-remove btn">Remove</button>
+              <button class="hero editor__btn-remove btn">Remove</button>
             </div>
-            <div class="editor__hero-item">
+            <div class="hero editor__item">
               <img
-                class="editor__hero-placeholder-img"
+                class="hero editor__placeholder-img"
                 src="https://placehold.co/800"
                 alt="Placeholder Image"
               />
-              <button class="editor__hero-btn-remove btn">Remove</button>
+              <button class="hero editor__btn-remove btn">Remove</button>
             </div>
-            <div class="editor__hero-item">
+            <div class="hero editor__item">
               <img
-                class="editor__hero-placeholder-img"
+                class="hero editor__placeholder-img"
                 src="https://placehold.co/800"
                 alt="Placeholder Image"
               />
-              <button class="editor__hero-btn-remove btn">Remove</button>
+              <button class="hero editor__btn-remove btn">Remove</button>
             </div>
           </div>
-          <div class="editor__hero-list not-placeholder-list"></div>
+          <div class="hero editor__list not-placeholder-list"></div>
         </div>
       </section>
-      <!--  -->
-      <div class="editor__about-message-container container">
+      <!-- about & msg container  -->
+      <div class="editor__container">
         <!-- about editor -->
-        <section class="editor__about section container">
-          <h2 class="editor__about-title">About Image</h2>
-          <div class="editor__about-dragHolder-wrapper">
-            <div class="editor__about-dragHolder">
-              <div class="editor__about-dragHolder-title">
+        <section class="about editor__about section container">
+          <h2 class="about editor__title">About Image</h2>
+          <div class="about editor__dragHolder-wrapper">
+            <div class="about editor__dragHolder">
+              <div class="about editor__dragHolder-title">
                 Drag & Drop Img
-                <button class="editor__about-dragHolder__close-btn btn">
+                <button class="about editor__dragHolder__close-btn btn">
                   Close
                 </button>
               </div>
-              <div class="editor__about-dragHolder-content">
+              <div class="about editor__dragHolder-content">
                 <svg
                   width="800px"
                   height="800px"
@@ -156,54 +161,54 @@
                   </g>
                 </svg>
               </div>
-              <div class="editor__about-dragHolder-content-input">
+              <div class="about editor__dragHolder-content-input">
                 <input
                   type="file"
-                  class="editor__about-dragHolder-content-input-btn"
+                  class="about editor__dragHolder-content-input-btn"
                   accept="image/*"
                   multiple
                 />
               </div>
 
-              <div class="editor__about-dragHolder-footer">
-                <div class="editor__about-dragHolder-img-count">0</div>
-                <button class="editor__about-dragHolder__add-btn btn">
+              <div class="about editor__dragHolder-footer">
+                <div class="about editor__dragHolder-img-count">0</div>
+                <button class="about editor__dragHolder__add-btn btn">
                   Add
                 </button>
               </div>
             </div>
           </div>
-          <div class="editor__about-wrapper">
-            <button class="editor__about-btn-add btn">Add</button>
-            <button class="editor__about-img-counter btn">0</button>
-            <div class="editor__about-zero-img">
+          <div class="about editor__wrapper">
+            <button class="about editor__btn-add btn">Add</button>
+            <button class="about editor__img-counter btn">0</button>
+            <div class="about editor__zero-img">
               No images here, press the add button to add images
             </div>
-            <div class="editor__about-list placeholder-list">
-              <div class="editor__about-item">
+            <div class="about editor__list placeholder-list">
+              <div class="about editor__item">
                 <img
-                  class="editor__about-placeholder-img"
+                  class="about editor__placeholder-img"
                   src="https://placehold.co/800"
                   alt="Placeholder Image"
                 />
-                <button class="editor__about-btn-remove btn">Remove</button>
+                <button class="about editor__btn-remove btn">Remove</button>
               </div>
             </div>
-            <div class="editor__about-list not-placeholder-list"></div>
+            <div class="about editor__list not-placeholder-list"></div>
           </div>
         </section>
         <!-- message editor -->
-        <section class="editor__msg section container">
-          <h2 class="editor__msg-title">Hero Images</h2>
-          <div class="editor__msg-dragHolder-wrapper">
-            <div class="editor__msg-dragHolder">
-              <div class="editor__msg-dragHolder-title">
+        <section class="msg editor__msg section container">
+          <h2 class="msg editor__title">Msg Image</h2>
+          <div class="msg editor__dragHolder-wrapper">
+            <div class="msg editor__dragHolder">
+              <div class="msg editor__dragHolder-title">
                 Drag & Drop Img
-                <button class="editor__about-dragHolder__close-btn btn">
+                <button class="msg editor__dragHolder__close-btn btn">
                   Close
                 </button>
               </div>
-              <div class="editor__msg-dragHolder-content">
+              <div class="msg editor__dragHolder-content">
                 <svg
                   width="800px"
                   height="800px"
@@ -221,41 +226,163 @@
                   </g>
                 </svg>
               </div>
-              <div class="editor__msg-dragHolder-content-input">
+              <div class="msg editor__dragHolder-content-input">
                 <input
                   type="file"
-                  class="editor__msg-dragHolder-content-input-btn"
+                  class="msg editor__dragHolder-content-input-btn"
                   accept="image/*"
                   multiple
                 />
               </div>
 
-              <div class="editor__msg-dragHolder-footer">
-                <div class="dragHolder-img-count">0</div>
-                <button class="dragHolder__add-btn btn">Add</button>
+              <div class="msg editor__dragHolder-footer">
+                <div class="msg editor__dragHolder-img-count">0</div>
+                <button class="msg editor__dragHolder__add-btn btn">Add</button>
               </div>
             </div>
           </div>
-          <div class="editor__msg-wrapper">
-            <button class="editor__msg-btn-add btn">Add</button>
-            <button class="editor__msg-img-counter btn">0</button>
-            <div class="editor__msg-zero-img">
+          <div class="msg editor__wrapper">
+            <button class="msg editor__btn-add btn">Add</button>
+            <button class="msg editor__img-counter btn">0</button>
+            <div class="msg editor__zero-img">
               No images here, press the add button to add images
             </div>
-            <div class="editor__msg-list placeholder-list">
-              <div class="editor__msg-item">
+            <div class="msg editor__list placeholder-list">
+              <div class="msg editor__item">
                 <img
-                  class="editor__msg-placeholder-img"
+                  class="msg editor__placeholder-img"
                   src="https://placehold.co/800"
                   alt="Placeholder Image"
                 />
-                <button class="editor__msg-btn-remove btn">Remove</button>
+                <button class="msg editor__btn-remove btn">Remove</button>
               </div>
             </div>
-            <div class="editor__msg-list not-placeholder-list"></div>
+            <div class="msg editor__list not-placeholder-list"></div>
           </div>
         </section>
       </div>
+
+      <!-- gallery editor -->
+      <section class="gallery editor__gallery section container">
+        <h2 class="gallery editor__title">Gallery Image</h2>
+        <div class="gallery editor__dragHolder-wrapper">
+          <div class="gallery editor__dragHolder">
+            <div class="gallery editor__dragHolder-title">
+              Drag & Drop Img
+              <button class="gallery editor__dragHolder__close-btn btn">
+                Close
+              </button>
+            </div>
+            <div class="gallery editor__dragHolder-content">
+              <svg
+                width="800px"
+                height="800px"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="drag__svg"
+              >
+                <g>
+                  <path fill="none" d="M0 0h24v24H0z" />
+                  <path
+                    fill-rule="nonzero"
+                    d="M14 6h2v2h5a1 1 0 0 1 1 1v7.5L16 13l.036 8.062 2.223-2.15L20.041 22H9a1 1 0 0 1-1-1v-5H6v-2h2V9a1 1 0 0 1 1-1h5V6zm8 11.338V21a1 1 0 0 1-.048.307l-1.96-3.394L22 17.338zM4 14v2H2v-2h2zm0-4v2H2v-2h2zm0-4v2H2V6h2zm0-4v2H2V2h2zm4 0v2H6V2h2zm4 0v2h-2V2h2zm4 0v2h-2V2h2z"
+                  />
+                </g>
+              </svg>
+            </div>
+            <div class="gallery editor__dragHolder-content-input">
+              <input
+                type="file"
+                class="gallery editor__dragHolder-content-input-btn"
+                accept="image/*"
+                multiple
+              />
+            </div>
+
+            <div class="gallery editor__dragHolder-footer">
+              <div class="gallery editor__dragHolder-img-count">0</div>
+              <button class="gallery editor__dragHolder__add-btn btn">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="gallery editor__wrapper">
+          <button class="gallery editor__btn-add btn">Add</button>
+          <button class="gallery editor__calendar-open-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="currentColor"
+            >
+              <path
+                d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"
+              />
+            </svg>
+          </button>
+          <button class="editor__note gallery">
+            First select month and year from the calendar icon
+          </button>
+          <button class="gallery editor__img-counter btn">0</button>
+          <div class="gallery editor__zero-img">
+            No images here, press the add button to add images
+          </div>
+          <div class="gallery editor__list placeholder-list">
+            <div class="gallery editor__item">
+              <img
+                class="gallery editor__placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="gallery editor__btn-remove btn">Remove</button>
+            </div>
+            <div class="gallery editor__item">
+              <img
+                class="gallery editor__placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="gallery editor__btn-remove btn">Remove</button>
+            </div>
+            <div class="gallery editor__item">
+              <img
+                class="gallery editor__placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="gallery editor__btn-remove btn">Remove</button>
+            </div>
+            <div class="gallery editor__item">
+              <img
+                class="gallery editor__placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="gallery editor__btn-remove btn">Remove</button>
+            </div>
+            <div class="gallery editor__item">
+              <img
+                class="gallery editor__placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="gallery editor__btn-remove btn">Remove</button>
+            </div>
+            <div class="gallery editor__item">
+              <img
+                class="gallery editor__placeholder-img"
+                src="https://placehold.co/800"
+                alt="Placeholder Image"
+              />
+              <button class="gallery editor__btn-remove btn">Remove</button>
+            </div>
+          </div>
+          <div class="gallery editor__list not-placeholder-list"></div>
+        </div>
+      </section>
       <section></section>
     </main>
   </body>
