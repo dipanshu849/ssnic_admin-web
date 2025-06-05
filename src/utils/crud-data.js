@@ -1,4 +1,5 @@
 import { supabase } from "../supabaseClient";
+import handleDetailToImg from "./add-detail";
 
 const getImgs = (type, folder, subfolder = null, bucket = "home") => {
   const path = subfolder
@@ -28,7 +29,7 @@ const getImgs = (type, folder, subfolder = null, bucket = "home") => {
   let setIntervalId;
   let isSetIntervalRunning = true;
 
-  let removeBtn;
+  let removeBtn, detailBtn;
 
   const fetchImgs = async () => {
     const { data, error } = await supabase.storage
@@ -42,28 +43,39 @@ const getImgs = (type, folder, subfolder = null, bucket = "home") => {
     .then((Imgs) => {
       imgUrl = [];
       editor__List.replaceChildren(); // remove existing img
+      console.log("IMGS: ", Imgs);
 
       Imgs.forEach((img, index) => {
         const { data } = supabase.storage
           .from(`${bucket}`)
           .getPublicUrl(`${path}/` + img.name);
         console.log(img.name);
+        console.log("IMG DATA: ", data);
         if (img.name == ".emptyFolderPlaceholder") {
           return;
         }
         if (imgUrl.indexOf(data.publicUrl) == -1) {
           imgUrl.push(data.publicUrl);
           const listItem = document.createElement("div");
+          console.log("IMG: ", img);
           listItem.className = `editor__item ${type}`;
           listItem.innerHTML = `
-             <img class="editor__img ${type}" src="${
-            data.publicUrl
-          }" data-src="${img.name}" alt="${type} Image ${index + 1}" />
-                <button class="editor__btn-remove ${type} btn">Remove</button>
+          <img 
+          class="editor__img ${type}"
+           src="${data.publicUrl}" 
+           data-src="${img.name}" 
+           data-path="${path}/${img.name}" 
+           data-bucket="${bucket}" 
+           alt="${type} Image ${index + 1}" 
+
+          <button class="editor__btn-remove ${type} btn">Remove</button>
+          <button class="${type} editor__btn-add-details btn">Add Details</button>
           `;
           editor__List.appendChild(listItem);
         }
       });
+      // data-title="${img.dataset.title}"
+      // data-description="${img.dataset.description}"/>
 
       const editor__ItemImg = document.querySelectorAll(`.editor__img.${type}`);
       imgNumberDisplayer.textContent = imgUrl.length;
@@ -86,6 +98,12 @@ const getImgs = (type, folder, subfolder = null, bucket = "home") => {
           editor__List.style.display = "flex";
           clearInterval(setIntervalId);
           isSetIntervalRunning = false;
+
+          // ------------------------------- Below code to add detail btn
+
+          if (!isSetIntervalRunning) {
+            handleDetailToImg(type);
+          }
 
           // ------------------------------- Below code to remove img
 

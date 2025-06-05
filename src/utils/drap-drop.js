@@ -1,5 +1,5 @@
 import { supabase } from "../supabaseClient";
-import getImgs from "./get-data";
+import getImgs from "./crud-data";
 import Compressor from "compressorjs";
 
 const drapDrop = (

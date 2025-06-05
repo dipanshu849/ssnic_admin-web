@@ -1,6 +1,6 @@
 import { supabase } from ".././supabaseClient";
 import getMetaData from "./meta-data";
-import getImgs from "../utils/get-data.js";
+import getImgs from "../utils/crud-data.js";
 import drapDrop from "../utils/drap-drop.js";
 import showCalendar from "../utils/calender.js";
 
@@ -17,7 +17,7 @@ const handleData = async () => {
   // getImgs and draDrop for gallery called from
   // showCalendar.showMonthCalendar();
 
-  // getImgs and draDrop for gallery called from
+  // getImgs and draDrop for news called from
   showCalendar.showDailyCalendar();
 };
 
