@@ -26,7 +26,7 @@ body {
   height: 100%;
 }
 
-.editor__note.gallery {
+.editor__note {
   position: absolute;
   font-weight: 500;
   top: 0.5rem;
@@ -34,10 +34,11 @@ body {
   font-size: var(--size-xs);
   padding: 0.5em 1em;
   border-radius: 6px;
-  background-color: var(--color-red-800);
+  background-color: var(--color-slate-600);
+  letter-spacing: 0.02em;
   color: var(--color-slate-50);
   z-index: 9;
-  max-width: 30ch;
+  max-width: 35ch;
 }
 
 /* specific end  [EXPCEPTION]*/
@@ -332,7 +333,7 @@ body {
   .editor__calendar-open-btn {
     width: 40px;
   }
-  .editor__note.gallery {
+  .editor__note {
     font-size: var(--size-xs);
   }
 
@@ -401,7 +402,7 @@ body {
     left: 5.5rem;
     width: 45px;
   }
-  .editor__note.gallery {
+  .editor__note {
     right: 5rem;
     font-size: var(--size-sm);
   }
@@ -466,7 +467,7 @@ body {
     left: 6.5rem;
     width: 50px;
   }
-  .editor__note.gallery {
+  .editor__note {
     right: 5rem;
     font-size: var(--size-base);
   }

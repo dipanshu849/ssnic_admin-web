@@ -2,9 +2,21 @@ import { supabase } from "../supabaseClient";
 import getImgs from "./get-data";
 import Compressor from "compressorjs";
 
-const drapDrop = (type, folder, subfolder = null, bucket = "home") => {
+const drapDrop = (
+  type,
+  folder,
+  subfolder = null,
+  bucket = "home",
+  controller = null
+) => {
   // ------------------------------- VARIABLES
-  const path = subfolder ? `${folder}/${subfolder[0]}/${subfolder[1]}` : folder;
+  console.log("HERE");
+  const path = subfolder
+    ? subfolder[1]
+      ? `${folder}/${subfolder[0]}/${subfolder[1]}`
+      : `${folder}/${subfolder[0]}`
+    : folder;
+
   const openBtn = document.querySelector(`.editor__btn-add.${type}`);
   const closeBtn = document.querySelector(
     `.editor__dragHolder__close-btn.${type}`
@@ -245,19 +257,24 @@ const drapDrop = (type, folder, subfolder = null, bucket = "home") => {
 
   // ------------------------------------------------ END OF FUNCTIONS
 
-  openBtn.removeEventListener("click", handleClickOpenBtn);
-  closeBtn.removeEventListener("click", handleClickCloseBtn);
-  dragHolderContent.removeEventListener("drop", dropHandler);
-  dragHolderContent.removeEventListener("dragover", dragOverHandler);
-  inputFileBtn.removeEventListener("change", handleInputFileBtnClick);
-  imgFinalAddBtn.removeEventListener("click", handleClickUploadBtn);
-
-  openBtn.addEventListener("click", handleClickOpenBtn);
-  closeBtn.addEventListener("click", handleClickCloseBtn);
-  dragHolderContent.addEventListener("drop", dropHandler);
-  dragHolderContent.addEventListener("dragover", dragOverHandler);
-  inputFileBtn.addEventListener("change", handleInputFileBtnClick);
-  imgFinalAddBtn.addEventListener("click", handleClickUploadBtn);
+  openBtn.addEventListener("click", handleClickOpenBtn, {
+    signal: controller.signal,
+  });
+  closeBtn.addEventListener("click", handleClickCloseBtn, {
+    signal: controller.signal,
+  });
+  dragHolderContent.addEventListener("drop", dropHandler, {
+    signal: controller.signal,
+  });
+  dragHolderContent.addEventListener("dragover", dragOverHandler, {
+    signal: controller.signal,
+  });
+  inputFileBtn.addEventListener("change", handleInputFileBtnClick, {
+    signal: controller.signal,
+  });
+  imgFinalAddBtn.addEventListener("click", handleClickUploadBtn, {
+    signal: controller.signal,
+  });
 };
 
 export default drapDrop;

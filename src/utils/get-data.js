@@ -1,8 +1,11 @@
 import { supabase } from "../supabaseClient";
 
 const getImgs = (type, folder, subfolder = null, bucket = "home") => {
-  const path = subfolder ? `${folder}/${subfolder[0]}/${subfolder[1]}` : folder;
-
+  const path = subfolder
+    ? subfolder[1]
+      ? `${folder}/${subfolder[0]}/${subfolder[1]}`
+      : `${folder}/${subfolder[0]}`
+    : folder;
   const editor__List = document.querySelector(
     `.editor__list.not-placeholder-list.${type}`
   );
