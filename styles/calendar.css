@@ -22,6 +22,8 @@
   border-radius: 6px !important;
 }
 
+/* labels START */
+
 .vc-label {
   border: 1px solid var(--color-slate-400);
   border-radius: 6px;
@@ -33,6 +35,9 @@
   font-size: var(--size-sm);
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
+  z-index: 998;
+  width: 200px;
+  margin: 0.5rem auto;
 }
 
 .vc-label > a {
@@ -93,6 +98,8 @@
   color: var(--color-red-800);
 }
 
+/* labels END */
+
 .vc-header__content button {
   color: var(--color-slate-800) !important;
   font-size: var(--size-sm);
@@ -152,6 +159,12 @@
   .vc-months__month {
     font-size: var(--size-sm) !important;
   }
+
+  /* labels START */
+  .vc-label {
+    font-size: var(--size-base);
+  }
+  /* labels END */
 }
 
 /* sm */
@@ -176,6 +189,13 @@
   .vc-months__month {
     font-size: var(--size-base) !important;
   }
+
+  /* labels START */
+  .vc-label {
+    font-size: var(--size-lg);
+    width: 300px;
+  }
+  /* labels END */
 }
 
 /* xl */
@@ -192,6 +212,13 @@
   .vc-months__month {
     font-size: var(--size-lg) !important;
   }
+
+  /* labels START */
+  .vc-label {
+    font-size: var(--size-xl);
+    width: 400px;
+  }
+  /* labels END */
 }
 
 /* 2xl */

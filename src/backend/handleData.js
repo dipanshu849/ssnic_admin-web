@@ -9,16 +9,16 @@ const handleData = async () => {
 
   const typeArr = ["hero", "about", "msg"];
   const folderArr = ["hero", "about", "msg"];
-  // typeArr.forEach((type, index) => {
-  //   getImgs(type, folderArr[index]);
-  //   drapDrop(type, folderArr[index]);
-  // });
+  typeArr.forEach((type, index) => {
+    getImgs(type, folderArr[index]);
+    drapDrop(type, folderArr[index]);
+  });
 
   // getImgs and draDrop for gallery called from
-  // showCalendar.showMonthCalendar();
+  showCalendar.showMonthCalendar();
 
   // getImgs and draDrop for news called from
-  showCalendar.showDailyCalendar();
+  showCalendar.showNewsLabel();
 };
 
 export default handleData;

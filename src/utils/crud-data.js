@@ -43,21 +43,17 @@ const getImgs = (type, folder, subfolder = null, bucket = "home") => {
     .then((Imgs) => {
       imgUrl = [];
       editor__List.replaceChildren(); // remove existing img
-      console.log("IMGS: ", Imgs);
 
       Imgs.forEach((img, index) => {
         const { data } = supabase.storage
           .from(`${bucket}`)
           .getPublicUrl(`${path}/` + img.name);
-        console.log(img.name);
-        console.log("IMG DATA: ", data);
         if (img.name == ".emptyFolderPlaceholder") {
           return;
         }
         if (imgUrl.indexOf(data.publicUrl) == -1) {
           imgUrl.push(data.publicUrl);
           const listItem = document.createElement("div");
-          console.log("IMG: ", img);
           listItem.className = `editor__item ${type}`;
           listItem.innerHTML = `
           <img 
@@ -66,7 +62,7 @@ const getImgs = (type, folder, subfolder = null, bucket = "home") => {
            data-src="${img.name}" 
            data-path="${path}/${img.name}" 
            data-bucket="${bucket}" 
-           alt="${type} Image ${index + 1}" 
+           alt="${type} Image ${index + 1}" />
 
           <button class="editor__btn-remove ${type} btn">Remove</button>
           <button class="${type} editor__btn-add-details btn">Add Details</button>

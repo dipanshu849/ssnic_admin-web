@@ -32,9 +32,6 @@
     <div class="editor__calender-container monthly">
       <div id="calendar" class="editor__calender monthly"></div>
     </div>
-    <div class="editor__calender-container daily">
-      <div id="calendar" class="editor__calender daily"></div>
-    </div>
     <!-- details -->
     <div class="editor__detail-form-container">
       <div class="editor__detail-form">
@@ -59,6 +56,17 @@
             cols="33"
             placeholder="Enter description of event here..."
           ></textarea>
+        </div>
+        <div class="editor__detail-input-date">
+          <label for="editor__detail-input">Date:</label>
+
+          <input
+            type="date"
+            id="editor__detail-input"
+            name="news-date"
+            min="2005-01-01"
+            max="2205-12-31"
+          />
         </div>
         <div class="editor__detail-form-footer">
           <button class="editor__detail-update-btn btn">Update</button>
@@ -460,9 +468,10 @@
             </div>
           </div>
         </div>
+        <!-- draghold END -->
         <div class="news editor__wrapper">
           <button class="news editor__btn-add btn">Add</button>
-          <button class="news editor__calendar-open-btn">
+          <!-- <button class="news editor__calendar-open-btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -474,10 +483,23 @@
                 d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"
               />
             </svg>
-          </button>
-          <button class="editor__note news">
+          </button> -->
+          <div class="vc-label">
+            <a href="#label">Labels</a>
+            <ul class="vc-menu hidden">
+              <li class="vc-menu-item"><a href="#0"> Achievements </a></li>
+              <li class="vc-menu-item"><a href="#0"> Upcoming Events </a></li>
+              <li class="vc-menu-item"><a href="#0"> Competitions </a></li>
+              <li class="vc-menu-item"><a href="#0"> Special Visit </a></li>
+              <li class="vc-menu-item">
+                <a href="#0"> Outdoor Activities </a>
+              </li>
+              <li class="vc-menu-item"><a href="#0"> Vacancies </a></li>
+            </ul>
+          </div>
+          <!-- <button class="editor__note news">
             First select month and year from the calendar icon
-          </button>
+          </button> -->
           <button class="news editor__img-counter btn">0</button>
           <div class="news editor__zero-img">
             No images here, press the add button to add images

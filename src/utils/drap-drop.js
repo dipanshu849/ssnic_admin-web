@@ -10,7 +10,6 @@ const drapDrop = (
   controller = null
 ) => {
   // ------------------------------- VARIABLES
-  console.log("HERE");
   const path = subfolder
     ? subfolder[1]
       ? `${folder}/${subfolder[0]}/${subfolder[1]}`
@@ -258,22 +257,22 @@ const drapDrop = (
   // ------------------------------------------------ END OF FUNCTIONS
 
   openBtn.addEventListener("click", handleClickOpenBtn, {
-    signal: controller.signal,
+    signal: controller ? controller.signal : undefined,
   });
   closeBtn.addEventListener("click", handleClickCloseBtn, {
-    signal: controller.signal,
+    signal: controller ? controller.signal : undefined,
   });
   dragHolderContent.addEventListener("drop", dropHandler, {
-    signal: controller.signal,
+    signal: controller ? controller.signal : undefined,
   });
   dragHolderContent.addEventListener("dragover", dragOverHandler, {
-    signal: controller.signal,
+    signal: controller ? controller.signal : undefined,
   });
   inputFileBtn.addEventListener("change", handleInputFileBtnClick, {
-    signal: controller.signal,
+    signal: controller ? controller.signal : undefined,
   });
   imgFinalAddBtn.addEventListener("click", handleClickUploadBtn, {
-    signal: controller.signal,
+    signal: controller ? controller.signal : undefined,
   });
 };
 

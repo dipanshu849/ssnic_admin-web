@@ -55,6 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
+  position: relative;
 }
 
 .editor__detail-form-header label {
@@ -99,6 +100,29 @@ body {
   background-color: var(--color-slate-100);
   min-width: 33ch;
   min-height: 5ch;
+}
+
+.editor__detail-input-date {
+  display: flex;
+  flex-direction: column;
+}
+
+.editor__detail-input-date label {
+  font-size: var(--size-sm);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-slate-800);
+}
+
+#editor__detail-input {
+  border: 1px solid var(--color-slate-600);
+  border-radius: 6px;
+  color: var(--color-slate-800);
+  outline: none;
+  padding: 0.5em;
+  font-weight: 500;
+  caret-color: var(--color-slate-800);
+  background-color: var(--color-slate-100);
 }
 
 .editor__detail-form-footer {
@@ -304,7 +328,7 @@ body {
 /* dragholder end */
 
 .editor__wrapper {
-  height: var(--editor-wrapper-size);
+  min-height: var(--editor-wrapper-size);
   border: 1px solid var(--color-slate-400);
   border-radius: 6px;
   min-width: 434px;
@@ -420,7 +444,6 @@ body {
 /* xs */
 @media (min-width: 475px) {
   body {
-    --editor-wrapper-size: 360px;
     --dragable-size: 300px;
   }
 
@@ -446,6 +469,10 @@ body {
   .editor__detail-form-body textarea {
     min-width: 40ch;
     min-height: 7ch;
+  }
+
+  .editor__detail-input-date label {
+    font-size: var(--size-base);
   }
 
   .editor__detail-update-btn {
@@ -536,6 +563,10 @@ body {
     font-size: var(--size-lg);
   }
 
+  .editor__detail-form-header input {
+    font-size: var(--size-base);
+  }
+
   .editor__detail-form-body label {
     font-size: var(--size-lg);
   }
@@ -543,6 +574,15 @@ body {
   .editor__detail-form-body textarea {
     min-width: 50ch;
     min-height: 14ch;
+    font-size: var(--size-base);
+  }
+
+  .editor__detail-input-date label {
+    font-size: var(--size-lg);
+  }
+
+  .editor__detail-input {
+    font-size: var(--size-base);
   }
 
   .editor__detail-update-btn {
@@ -612,6 +652,10 @@ body {
     font-size: var(--size-xl);
   }
 
+  .editor__detail-form-header input {
+    font-size: var(--size-lg);
+  }
+
   .editor__detail-form-body label {
     font-size: var(--size-xl);
   }
@@ -619,6 +663,15 @@ body {
   .editor__detail-form-body textarea {
     min-width: 60ch;
     min-height: 18ch;
+    font-size: var(--size-lg);
+  }
+
+  .editor__detail-input-date label {
+    font-size: var(--size-xl);
+  }
+
+  .editor__detail-input {
+    font-size: var(--size-lg);
   }
 
   .editor__detail-update-btn {
