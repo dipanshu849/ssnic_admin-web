@@ -73,6 +73,77 @@
         </div>
       </div>
     </div>
+    <!-- event details form -->
+    <div class="editor__table-detail-form-container">
+      <div class="editor__table-detail-form">
+        <button class="editor__table-detail-form-close-btn btn">Close</button>
+        <div class="editor__table-detail-form-header">
+          <form action="">
+            <label for="editor__table-detail-date">Date of event:</label>
+            <input type="date" id="editor__table-detail-date" />
+          </form>
+          <form action="">
+            <label for="editor__table-detail-start-time">Start Time:</label>
+
+            <input
+              type="time"
+              id="editor__table-detail-start-time"
+              name="start time"
+              min="09:00"
+              max="18:00"
+              required
+            />
+          </form>
+          <form action="">
+            <label for="editor__table-detail-end-time">End Time:</label>
+
+            <input
+              type="time"
+              id="editor__table-detail-end-time"
+              name="end time"
+              min="09:00"
+              max="18:00"
+              required
+            />
+          </form>
+        </div>
+        <div class="editor__table-detail-form-body">
+          <form action="">
+            <label for="editor__table-detail-form-venue"> Venue </label>
+            <input
+              type="text"
+              name="title"
+              id="editor__table-detail-form-venue"
+              placeholder="Enter venue here.."
+              required
+            />
+          </form>
+          <form action="">
+            <label for="editor__table-detail-form-event"> Event </label>
+            <input
+              type="text"
+              name="title"
+              id="editor__table-detail-form-event"
+              placeholder="Eg. Staff meeting"
+              required
+            />
+          </form>
+          <form action="">
+            <label for="editor__table-detail-form-result"> Result </label>
+            <input
+              type="text"
+              name="title"
+              id="editor__table-detail-form-result"
+              placeholder="Eg. Office will remain closed"
+              required
+            />
+          </form>
+        </div>
+        <div class="editor__table-detail-form-footer">
+          <button class="editor__table-detail-update-btn btn">Update</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Dashboard -->
     <main class="dashboard">
@@ -92,6 +163,7 @@
           <div>0</div>
         </div>
       </section>
+      <hr class="container section" />
       <!-- hero editor -->
       <section class="hero editor__hero section container">
         <h2 class="hero editor__title">Hero Images</h2>
@@ -302,6 +374,7 @@
           </div>
         </section>
       </div>
+      <hr class="container section" />
 
       <!-- gallery editor -->
       <section class="gallery editor__gallery section container">
@@ -396,30 +469,6 @@
               />
               <button class="gallery editor__btn-remove btn">Remove</button>
             </div>
-            <div class="gallery editor__item">
-              <img
-                class="gallery editor__placeholder-img"
-                src="https://placehold.co/800"
-                alt="Placeholder Image"
-              />
-              <button class="gallery editor__btn-remove btn">Remove</button>
-            </div>
-            <div class="gallery editor__item">
-              <img
-                class="gallery editor__placeholder-img"
-                src="https://placehold.co/800"
-                alt="Placeholder Image"
-              />
-              <button class="gallery editor__btn-remove btn">Remove</button>
-            </div>
-            <div class="gallery editor__item">
-              <img
-                class="gallery editor__placeholder-img"
-                src="https://placehold.co/800"
-                alt="Placeholder Image"
-              />
-              <button class="gallery editor__btn-remove btn">Remove</button>
-            </div>
           </div>
           <div class="gallery editor__list not-placeholder-list"></div>
         </div>
@@ -471,19 +520,6 @@
         <!-- draghold END -->
         <div class="news editor__wrapper">
           <button class="news editor__btn-add btn">Add</button>
-          <!-- <button class="news editor__calendar-open-btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24px"
-              viewBox="0 -960 960 960"
-              width="24px"
-              fill="currentColor"
-            >
-              <path
-                d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"
-              />
-            </svg>
-          </button> -->
           <div class="vc-label">
             <a href="#label">Labels</a>
             <ul class="vc-menu hidden">
@@ -497,41 +533,11 @@
               <li class="vc-menu-item"><a href="#0"> Vacancies </a></li>
             </ul>
           </div>
-          <!-- <button class="editor__note news">
-            First select month and year from the calendar icon
-          </button> -->
           <button class="news editor__img-counter btn">0</button>
           <div class="news editor__zero-img">
             No images here, press the add button to add images
           </div>
           <div class="news editor__list placeholder-list">
-            <div class="news editor__item">
-              <img
-                class="news editor__placeholder-img"
-                src="https://placehold.co/800"
-                alt="Placeholder Image"
-              />
-              <button class="news editor__btn-remove btn">Remove</button>
-              <button class="news editor__btn-add-details btn">
-                Add Details
-              </button>
-            </div>
-            <div class="news editor__item">
-              <img
-                class="news editor__placeholder-img"
-                src="https://placehold.co/800"
-                alt="Placeholder Image"
-              />
-              <button class="news editor__btn-remove btn">Remove</button>
-            </div>
-            <div class="news editor__item">
-              <img
-                class="news editor__placeholder-img"
-                src="https://placehold.co/800"
-                alt="Placeholder Image"
-              />
-              <button class="news editor__btn-remove btn">Remove</button>
-            </div>
             <div class="news editor__item">
               <img
                 class="news editor__placeholder-img"
@@ -560,7 +566,371 @@
           <div class="news editor__list not-placeholder-list"></div>
         </div>
       </section>
-      <section></section>
+      <hr class="container section" />
+
+      <!-- Table editor -->
+      <div class="editor__tables">
+        <!-- Events table -->
+        <section class="event editor__table container section">
+          <h2 class="events-table editor__table-title">Event Table</h2>
+          <div class="events-table editor__table-content-wrapper">
+            <div class="events-table editor__table-content">
+              <div class="events-table editor__table-header">
+                <div class="events-table editor__table-selected-date">
+                  <label for="editor__table-date"></label>
+                  <input
+                    type="date"
+                    class="editor__table-date events-table"
+                    id="editor__table-date"
+                  />
+                </div>
+                <button class="events-table editor__table-add-event-btn btn">
+                  Add Event
+                </button>
+                <button class="events-table editor__table-event-counter btn">
+                  0
+                </button>
+              </div>
+              <div class="events-table editor__table-body">
+                <div
+                  class="events-table editor__table-body-item editor__table-body-item-header"
+                >
+                  <div
+                    class="events-table editor__table-body-item-time delete-event-btn"
+                  ></div>
+                  <div
+                    class="events-table editor__table-body-item-time start-time"
+                  >
+                    Start Time
+                  </div>
+                  <div
+                    class="events-table editor__table-body-item-time end-time"
+                  >
+                    End Time
+                  </div>
+                  <div class="events-table editor__table-body-item-place">
+                    Venue
+                  </div>
+                  <div class="events-table editor__table-body-item-event">
+                    Event
+                  </div>
+                  <div class="events-table editor__table-body-item-result">
+                    Result
+                  </div>
+                </div>
+                <div class="events-table editor__table-body-item">
+                  <!-- PLACE PLACEHOLDER -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Athletics -->
+        <section class="athletics editor__table container section">
+          <h2 class="athletics-table editor__table-title">Athletics Table</h2>
+          <div class="athletics-table editor__table-content-wrapper">
+            <div class="athletics-table editor__table-content">
+              <div class="athletics-table editor__table-header">
+                <div class="athletics-table editor__table-selected-date">
+                  <label for="editor__table-date"></label>
+                  <input
+                    type="date"
+                    class="editor__table-date athletics-table"
+                    id="editor__table-date"
+                  />
+                </div>
+                <button class="athletics-table editor__table-add-event-btn btn">
+                  Add Event
+                </button>
+                <button class="athletics-table editor__table-event-counter btn">
+                  0
+                </button>
+              </div>
+              <div class="athletics-table editor__table-body">
+                <div
+                  class="athletics-table editor__table-body-item editor__table-body-item-header"
+                >
+                  <div
+                    class="athletics-table editor__table-body-item-time delete-event-btn"
+                  ></div>
+                  <div
+                    class="athletics-table editor__table-body-item-time start-time"
+                  >
+                    Start Time
+                  </div>
+                  <div
+                    class="athletics-table editor__table-body-item-time end-time"
+                  >
+                    End Time
+                  </div>
+                  <div class="athletics-table editor__table-body-item-place">
+                    Venue
+                  </div>
+                  <div class="athletics-table editor__table-body-item-event">
+                    Event
+                  </div>
+                  <div class="athletics-table editor__table-body-item-result">
+                    Result
+                  </div>
+                </div>
+                <div class="athletics-table editor__table-body-item">
+                  <!-- PLACE PLACEHOLDER -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Circulars -->
+        <section class="circulars editor__table container section">
+          <h2 class="circulars-table editor__table-title">Circulars Table</h2>
+          <div class="circulars-table editor__table-content-wrapper">
+            <div class="circulars-table editor__table-content">
+              <div class="circulars-table editor__table-header">
+                <div class="circulars-table editor__table-selected-date">
+                  <label for="editor__table-date"></label>
+                  <input
+                    type="date"
+                    class="editor__table-date circulars-table"
+                    id="editor__table-date"
+                  />
+                </div>
+                <button class="circulars-table editor__table-add-event-btn btn">
+                  Add Circular
+                </button>
+                <button class="circulars-table editor__table-event-counter btn">
+                  0
+                </button>
+              </div>
+              <div class="circulars-table editor__table-body">
+                <div
+                  class="circulars-table editor__table-body-item editor__table-body-item-header"
+                >
+                  <div
+                    class="circulars-table editor__table-body-item-time delete-event-btn"
+                  ></div>
+                  <div
+                    class="circulars-table editor__table-body-item-time start-time"
+                  >
+                    Start Time
+                  </div>
+                  <div
+                    class="circulars-table editor__table-body-item-time end-time"
+                  >
+                    End Time
+                  </div>
+                  <div class="circulars-table editor__table-body-item-place">
+                    Venue
+                  </div>
+                  <div class="circulars-table editor__table-body-item-event">
+                    Event
+                  </div>
+                  <div class="circulars-table editor__table-body-item-result">
+                    Result
+                  </div>
+                </div>
+                <div class="circulars-table editor__table-body-item">
+                  <!-- PLACE PLACEHOLDER -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <hr class="container section" />
+
+      <!-- handling meta-data -->
+      <div class="meta-data section container">
+        <!-- general-info -->
+        <section class="meta-data-general">
+          <h2 class="meta-data-title">General Info</h2>
+          <button class="meta-data-update-btn btn">Update</button>
+          <div class="meta-data-content">
+            <form action="">
+              <label for="meta-data-principal__name">Principal name</label>
+              <input
+                type="text"
+                name="principal__name"
+                id="meta-data-principal__name"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-faculty-number">Number of faculties</label>
+              <input
+                type="text"
+                name="faculty-number"
+                id="meta-data-faculty-number"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-classroom-number"
+                >Number of classroom</label
+              >
+              <input
+                type="text"
+                name="classroom-number"
+                id="meta-data-classroom-number"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-student-number">Number of students</label>
+              <input
+                type="text"
+                name="student-number"
+                id="meta-data-student-number"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-avg-class-size">Average class size</label>
+              <input
+                type="text"
+                name="avg-class-size"
+                id="meta-data-avg-class-size"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-area-campus">Area of campus</label>
+              <input
+                type="text"
+                name="area-campus"
+                id="meta-data-area-campus"
+              />
+            </form>
+          </div>
+        </section>
+        <!-- header-links -->
+        <section class="meta-data-header">
+          <h2 class="meta-data-header-title">Menu links</h2>
+          <button class="meta-data-header-update-btn btn">Update</button>
+          <div class="meta-data-header-content">
+            <form action="">
+              <label for="meta-data-header-fee-structure-link"
+                >Fee structure</label
+              >
+              <input
+                type="text"
+                name="fee-structure-link"
+                id="meta-data-header-fee-structure-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-admission-criteria-link"
+                >Admission criteria</label
+              >
+              <input
+                type="text"
+                name="admission-criteria-link"
+                id="meta-data-header-admission-criteria-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-admission-process-link"
+                >Admission process</label
+              >
+              <input
+                type="text"
+                name="admission-process-link"
+                id="meta-data-header-admission-process-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-school-dress-link"
+                >School dress</label
+              >
+              <input
+                type="text"
+                name="school-dress-link"
+                id="meta-data-header-school-dress-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-curriculum-link">Curriculum</label>
+              <input
+                type="text"
+                name="curriculum-link"
+                id="meta-data-header-curriculum-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-exam-schedule-link"
+                >Exam schedule</label
+              >
+              <input
+                type="text"
+                name="exam-schedule-link"
+                id="meta-data-header-exam-schedule-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-list-sports-link"
+                >List of sports</label
+              >
+              <input
+                type="text"
+                name="list-sports-link"
+                id="meta-data-header-list-sports-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-sports-facilities-link"
+                >Sports facilities</label
+              >
+              <input
+                type="text"
+                name="sports-facilities-link"
+                id="meta-data-header-sports-facilities-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-header-school-facilities-link"
+                >School facilities</label
+              >
+              <input
+                type="text"
+                name="school-facilities-link"
+                id="meta-data-header-school-facilities-link"
+              />
+            </form>
+          </div>
+        </section>
+        <!-- footer-links -->
+        <section class="meta-data-footer">
+          <h2 class="meta-data-links-title">Footer Links</h2>
+          <button class="meta-data-links-update-btn btn">Update</button>
+          <div class="meta-data-links-content">
+            <form action="">
+              <label for="meta-data-yt-link">Youtube</label>
+              <input type="text" name="yt-link" id="meta-data-yt-link" />
+            </form>
+            <form action="">
+              <label for="meta-data-fb-link">Facebook</label>
+              <input type="text" name="fb-link" id="meta-data-fb-link" />
+            </form>
+            <form action="">
+              <label for="meta-data-insta-link">Instagram</label>
+              <input type="text" name="insta-link" id="meta-data-insta-link" />
+            </form>
+            <form action="">
+              <label for="meta-data-family-resources-link"
+                >Family resources</label
+              >
+              <input
+                type="text"
+                name="family-resources-link"
+                id="meta-data-family-resources-link"
+              />
+            </form>
+            <form action="">
+              <label for="meta-data-address-map-link">Address Map</label>
+              <input
+                type="text"
+                name="address-map-link"
+                id="meta-data-address-map-link"
+              />
+            </form>
+          </div>
+        </section>
+      </div>
+      <hr class="container section" />
     </main>
   </body>
 

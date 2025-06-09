@@ -413,6 +413,9 @@ body {
   color: var(--color-red-600) !important;
   border: none;
   background-color: var(--color-slate-50);
+  border: none !important;
+  border-bottom: 1px solid var(--color-slate-600) !important;
+  border-left: 1px solid var(--color-slate-600) !important;
 }
 
 .editor__btn-add-details {
@@ -421,6 +424,9 @@ body {
   left: 0rem;
   border: none;
   background-color: var(--color-slate-50);
+  border: none !important;
+  border-top: 1px solid var(--color-slate-600) !important;
+  border-right: 1px solid var(--color-slate-600) !important;
 }
 
 .editor__item img {

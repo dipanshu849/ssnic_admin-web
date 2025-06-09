@@ -1,7 +1,7 @@
 import { Calendar } from "vanilla-calendar-pro";
 import "vanilla-calendar-pro/styles/index.css";
 import drapDrop from "./drap-drop";
-import getImgs from "./crud-data";
+import getImgs from "./crud-section-data";
 
 const showMonthCalendar = () => {
   const calendarContainer = document.querySelector(

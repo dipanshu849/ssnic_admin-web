@@ -305,3 +305,7 @@ h3,
 h4 {
   color: var(--color-slate-800);
 }
+
+hr {
+  color: var(--color-indigo-600);
+}
