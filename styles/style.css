@@ -309,3 +309,33 @@ h4 {
 hr {
   color: var(--color-indigo-600);
 }
+
+.uploading {
+  display: inline-block;
+  border: 3px solid red;
+  height: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border-left-color: transparent;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.uploaded {
+  display: inline-block;
+  border: 3px solid green;
+  height: 12px;
+  aspect-ratio: 1.5;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  transform: rotate(315deg);
+}

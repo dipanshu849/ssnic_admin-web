@@ -38,7 +38,6 @@
 }
 
 .meta-data-header-content form input {
-  flex: 2;
   border: 1px solid var(--color-slate-600);
   border-radius: 6px;
   outline: none;
@@ -46,6 +45,7 @@
   font-size: var(--size-sm);
   font-weight: 500;
   color: var(--color-slate-600);
+  width: 50%;
 }
 
 /* xs */

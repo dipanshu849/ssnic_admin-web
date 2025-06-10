@@ -1,7 +1,6 @@
 import { supabase } from "../supabaseClient";
 
 const getMetaDataHeader = () => {
-  const updateBtn = document.querySelector(".meta-data-header-update-btn");
   const feeStructureInputElement = document.querySelector(
     "#meta-data-header-fee-structure-link"
   );
@@ -42,221 +41,180 @@ const getMetaDataHeader = () => {
   let sportsFacilities;
   let schoolFacilities;
 
-  let prevFeeStructure;
-  let prevAdmissionCriteria;
-  let prevAdmissionProcess;
-  let prevSchoolDress;
-  let prevCurriculum;
-  let prevExamSchedule;
-  let prevListSports;
-  let prevSportsFacilities;
-  let prevSchoolFacilities;
-
-  feeStructureInputElement.value = "";
-  admissionCriteriaInputElement.value = "";
-  admissionProcessInputElement.value = "";
-  schoolDressInputElement.value = "";
-  curriculumInputElement.value = "";
-  examScheduleInputElement.value = "";
-  listSportsInputElement.value = "";
-  sportsFacilitiesInputElement.value = "";
-  schoolFacilitiesInputElement.value = "";
-
   // ------------------------------------------------------ Functions
-  async function fetchMetaData() {
+  async function uploadPdfFileToDatabase(type, file, span, e) {
     return new Promise(async (resolve, reject) => {
-      const { data, error } = await supabase
-        .from("meta-data-header-links")
-        .select("*");
+      span.classList.remove("uploaded");
+      span.classList.add("uploading");
+      e.currentTarget.style.opacity = "0.5";
+      e.currentTarget.disabled = true;
+      const { data, error } = await supabase.storage
+        .from("pdfs")
+        .upload(`${type}.pdf`, file, {
+          cacheControl: "3600",
+          upsert: true,
+          contentType: "application/pdf",
+        });
 
       if (error) {
-        console.log("Error in fetching meta-data: ", error);
-        reject;
+        console.log(error);
+        reject(error, e);
       }
-      resolve(data);
-    });
-  }
-
-  function handleFetchMetaData() {
-    fetchMetaData().then((data) => {
-      data.forEach((row, index) => {
-        feeStructureInputElement.value = row.fee__structure;
-        admissionCriteriaInputElement.value = row.admission__criteria;
-        admissionProcessInputElement.value = row.admission__process;
-        schoolDressInputElement.value = row.school__dress;
-        curriculumInputElement.value = row.curriculum;
-        examScheduleInputElement.value = row.exam__schedule;
-        listSportsInputElement.value = row.list__of__sports;
-        sportsFacilitiesInputElement.value = row.sports__facilities;
-        schoolFacilitiesInputElement.value = row.school__facilities;
-
-        prevFeeStructure = row.fee__structure;
-        prevAdmissionCriteria = row.admission__criteria;
-        prevAdmissionProcess = row.admission__process;
-        prevSchoolDress = row.school__dress;
-        prevCurriculum = row.curriculum;
-        prevExamSchedule = row.exam__schedule;
-        prevListSports = row.list__of__sports;
-        prevSportsFacilities = row.sports__facilities;
-        prevSchoolFacilities = row.school__facilities;
-
-        feeStructure = prevFeeStructure;
-        admissionCriteria = prevAdmissionCriteria;
-        admissionProcess = prevAdmissionProcess;
-        schoolDress = prevSchoolDress;
-        curriculum = prevCurriculum;
-        examSchedule = prevExamSchedule;
-        listSports = prevListSports;
-        sportsFacilities = prevSportsFacilities;
-        schoolFacilities = prevSchoolFacilities;
-      });
+      resolve(data, e);
     });
   }
 
   function handleInputOnFeeStructureInputElement(e) {
-    feeStructure = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    feeStructure = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+
+    uploadPdfFileToDatabase("feeStructure", feeStructure, span, e).then(
+      (data) => {
+        span.classList.remove("uploading");
+        span.classList.add("uploaded");
+        feeStructureInputElement.style.opacity = "1";
+        feeStructureInputElement.disabled = false;
+      }
+    );
   }
 
   function handleInputOnAdmissionCriteriaInputElement(e) {
-    admissionCriteria = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    admissionCriteria = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+
+    uploadPdfFileToDatabase(
+      "admissionCriteria",
+      admissionCriteria,
+      span,
+      e
+    ).then((data) => {
+      span.classList.remove("uploading");
+      span.classList.add("uploaded");
+      admissionCriteriaInputElement.style.opacity = "1";
+      admissionCriteriaInputElement.disabled = false;
+    });
   }
 
   function handleInputOnAdmissionProcessInputElement(e) {
-    admissionProcess = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    admissionProcess = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+    uploadPdfFileToDatabase("admissionProcess", admissionProcess, span, e).then(
+      (data) => {
+        span.classList.remove("uploading");
+        span.classList.add("uploaded");
+        admissionProcessInputElement.style.opacity = "1";
+        admissionProcessInputElement.disabled = false;
+      }
+    );
   }
 
   function handleInputOnSchoolDressInputElement(e) {
-    schoolDress = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    schoolDress = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+
+    uploadPdfFileToDatabase("schoolDress", schoolDress, span, e).then(
+      (data) => {
+        span.classList.remove("uploading");
+        span.classList.add("uploaded");
+        schoolDressInputElement.style.opacity = "1";
+        schoolDressInputElement.disabled = false;
+      }
+    );
   }
 
   function handleInputOnCurriculumInputElement(e) {
-    curriculum = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    curriculum = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+
+    uploadPdfFileToDatabase("curriculum", curriculum, span, e).then((data) => {
+      span.classList.remove("uploading");
+      span.classList.add("uploaded");
+      curriculumInputElement.style.opacity = "1";
+      curriculumInputElement.disabled = false;
+    });
   }
 
   function handleInputOnExamScheduleInputElement(e) {
-    examSchedule = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    examSchedule = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+
+    uploadPdfFileToDatabase("examSchedule", examSchedule, span, e).then(
+      (data) => {
+        span.classList.remove("uploading");
+        span.classList.add("uploaded");
+        examScheduleInputElement.style.opacity = "1";
+        examScheduleInputElement.disabled = false;
+      }
+    );
   }
 
   function handleInputOnListSportsInputElement(e) {
-    listSports = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    listSports = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+
+    uploadPdfFileToDatabase("listSports", listSports, span, e).then((data) => {
+      span.classList.remove("uploading");
+      span.classList.add("uploaded");
+      listSportsInputElement.style.opacity = "1";
+      listSportsInputElement.disabled = false;
+    });
   }
 
   function handleInputOnSportsFacilitiesInputElement(e) {
-    sportsFacilities = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
+    sportsFacilities = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
+
+    uploadPdfFileToDatabase("sportsFacilities", sportsFacilities, span, e).then(
+      (data) => {
+        span.classList.remove("uploading");
+        span.classList.add("uploaded");
+        sportsFacilitiesInputElement.style.opacity = "1";
+        sportsFacilitiesInputElement.disabled = false;
+      }
+    );
   }
 
   function handleInputOnSchoolFacilitiesInputElement(e) {
-    schoolFacilities = e.currentTarget.value;
-    validateNUnlockUpdateBtn();
-  }
+    schoolFacilities = e.currentTarget.files[0];
+    const span = e.currentTarget.nextElementSibling;
 
-  function validateNUnlockUpdateBtn() {
-    if (
-      feeStructure &&
-      admissionCriteria &&
-      admissionProcess &&
-      schoolDress &&
-      curriculum &&
-      examSchedule &&
-      listSports &&
-      sportsFacilities &&
-      schoolFacilities &&
-      !(
-        feeStructure == prevFeeStructure &&
-        admissionCriteria == prevAdmissionCriteria &&
-        admissionProcess == prevAdmissionProcess &&
-        schoolDress == prevSchoolDress &&
-        curriculum == prevCurriculum &&
-        examSchedule == prevExamSchedule &&
-        listSports == prevListSports &&
-        sportsFacilities == prevSportsFacilities &&
-        schoolFacilities == prevSchoolFacilities
-      )
-    ) {
-      updateBtn.style.opacity = "1";
-      updateBtn.style.pointerEvents = "auto";
-    } else {
-      updateBtn.style.opacity = "0.5";
-      updateBtn.style.pointerEvents = "none";
-    }
-  }
-
-  async function updateMetaData() {
-    return new Promise(async (resolve, reject) => {
-      const { error } = await supabase
-        .from("meta-data-header-links")
-        .update({
-          fee__structure: `${feeStructure}`,
-          admission__criteria: `${admissionCriteria}`,
-          admission__process: `${admissionProcess}`,
-          school__dress: `${schoolDress}`,
-          curriculum: `${curriculum}`,
-          exam__schedule: `${examSchedule}`,
-          list__of__sports: `${listSports}`,
-          sports__facilities: `${sportsFacilities}`,
-          school__facilities: `${schoolFacilities}`,
-        })
-        .eq("id", 1);
-
-      if (error) {
-        console.log("Error in updating meta data general: ", error);
-        reject;
+    uploadPdfFileToDatabase("schoolFacilities", schoolFacilities, span, e).then(
+      (data) => {
+        span.classList.remove("uploading");
+        span.classList.add("uploaded");
+        schoolFacilitiesInputElement.style.opacity = "1";
+        schoolFacilitiesInputElement.disabled = false;
       }
-
-      resolve(error);
-    });
+    );
   }
-
-  function handleClickOnUpdateBtn() {
-    loader.style.display = "block";
-    document.body.overflow = "hidden";
-    updateMetaData().then((error) => {
-      handleFetchMetaData();
-      updateBtn.style.opacity = "0.5";
-      updateBtn.style.pointerEvents = "none";
-      loader.style.display = "none";
-      document.body.overflow = "auto";
-    });
-  }
-
-  handleFetchMetaData();
   // ----------------------------------------------------- Events
-  feeStructureInputElement.addEventListener("input", (e) => {
+  feeStructureInputElement.addEventListener("change", (e) => {
     handleInputOnFeeStructureInputElement(e);
   });
-  admissionCriteriaInputElement.addEventListener("input", (e) => {
+  admissionCriteriaInputElement.addEventListener("change", (e) => {
     handleInputOnAdmissionCriteriaInputElement(e);
   });
-  admissionProcessInputElement.addEventListener("input", (e) => {
+  admissionProcessInputElement.addEventListener("change", (e) => {
     handleInputOnAdmissionProcessInputElement(e);
   });
-  schoolDressInputElement.addEventListener("input", (e) => {
+  schoolDressInputElement.addEventListener("change", (e) => {
     handleInputOnSchoolDressInputElement(e);
   });
-  curriculumInputElement.addEventListener("input", (e) => {
+  curriculumInputElement.addEventListener("change", (e) => {
     handleInputOnCurriculumInputElement(e);
   });
-  examScheduleInputElement.addEventListener("input", (e) => {
+  examScheduleInputElement.addEventListener("change", (e) => {
     handleInputOnExamScheduleInputElement(e);
   });
-  listSportsInputElement.addEventListener("input", (e) => {
+  listSportsInputElement.addEventListener("change", (e) => {
     handleInputOnListSportsInputElement(e);
   });
-  sportsFacilitiesInputElement.addEventListener("input", (e) => {
+  sportsFacilitiesInputElement.addEventListener("change", (e) => {
     handleInputOnSportsFacilitiesInputElement(e);
   });
-  schoolFacilitiesInputElement.addEventListener("input", (e) => {
+  schoolFacilitiesInputElement.addEventListener("change", (e) => {
     handleInputOnSchoolFacilitiesInputElement(e);
   });
-  updateBtn.addEventListener("click", handleClickOnUpdateBtn);
 };
 
 export default getMetaDataHeader;
