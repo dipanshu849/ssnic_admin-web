@@ -262,10 +262,13 @@ const createNupdateData = (type) => {
   }
 
   async function insertDataInEventsTable(type) {
-    let newFileName = `${fileInputElement.files[0].name
-      .replaceAll(" ", "_")
-      .replaceAll("-", "")
-      .replaceAll("!", "")}`;
+    let newFileName = "Empty";
+    if (fileInputElement && fileInputElement.files[0]) {
+      newFileName = `${fileInputElement.files[0].name
+        .replaceAll(" ", "_")
+        .replaceAll("-", "")
+        .replaceAll("!", "")}`;
+    }
     return new Promise(async (resolve, reject) => {
       let err;
       if (type == "circulars-table") {
