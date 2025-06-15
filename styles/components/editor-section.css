@@ -364,18 +364,18 @@ body {
   color: var(--color-slate-800);
   font-weight: 500;
   padding: 0.2em;
-  display: none;
+  display: block;
   width: 100%;
   height: calc(var(--editor-wrapper-size) / 2);
   position: absolute;
-  opacity: 0;
+  opacity: 1;
 }
 
-.editor__zero-img.check:not(
-    :has(~ .editor__list.not-placeholder-list .editor__item)
+.editor__zero-img.check:has(
+    ~ .editor__list.not-placeholder-list > .editor__item
   ) {
-  display: block;
-  opacity: 1;
+  display: none;
+  opacity: 0;
 }
 
 .editor__btn-add {

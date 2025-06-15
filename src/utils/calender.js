@@ -88,7 +88,7 @@ const showNewsLabel = () => {
       item.classList.remove("selected");
     });
     let selectedItem = e.target;
-    selectedLabel = selectedItem.textContent.replaceAll(" ", "");
+    selectedLabel = selectedItem.textContent.replaceAll(" ", "").trim();
     localStorage.setItem("selectedLabel", selectedLabel);
     selectedItem.classList.add("selected");
 

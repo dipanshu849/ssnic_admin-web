@@ -35,8 +35,10 @@ const drapDrop = (
   const inputFileBtn = document.querySelector(
     `.editor__dragHolder-content-input-btn.${type}`
   );
-  const listOfResizedImgs = [];
+  let listOfResizedImgs = [];
   const loader = document.querySelector(".loader");
+
+  inputFileBtn.value = "";
   // ------------------------------------------------- END OF VARIABLES
 
   // ------------------------------ FUNCTIONS
@@ -44,12 +46,14 @@ const drapDrop = (
     dragHolder.style.display = "block";
     document.body.style.overflowY = "hidden";
     imgCounter.textContent = 0;
+    inputFileBtn.value = "";
   }
 
   function handleClickCloseBtn() {
     dragHolder.style.display = "none";
     document.body.style.overflowY = "auto";
     imgCounter.textContent = 0;
+    listOfResizedImgs = [];
     removeAllDisplayedImages();
   }
 
