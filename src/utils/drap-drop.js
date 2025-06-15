@@ -80,6 +80,7 @@ const drapDrop = (
     const imgType = /image.*/;
     [...e.dataTransfer.files].forEach((file, index) => {
       if (!file.type.match(imgType)) {
+        alert("Only JPEG, JPG and PNG files are allowed.");
         return;
       }
       const newImg = document.createElement("img");
@@ -154,20 +155,13 @@ const drapDrop = (
 
   function handleInputFileBtnClick() {
     const selectedFiles = inputFileBtn.files;
-
-    [...selectedFiles].forEach((file) => {
-      if (
-        file.type !== "image/jpeg" &&
-        file.type !== "image/png" &&
-        file.type !== "image/jpg"
-      ) {
-        alert("Only JPEG, JPG and PNG files are allowed.");
-        closeBtn.click();
-        return;
-      }
-    });
+    const imgType = /image.*/;
 
     [...selectedFiles].forEach((file, index) => {
+      if (!file.type.match(imgType)) {
+        alert("Only JPEG, JPG and PNG files are allowed.");
+        return;
+      }
       const newImg = document.createElement("img");
       newImg.file = file;
 
@@ -183,10 +177,10 @@ const drapDrop = (
             newImg.dataset.src = file.name; // store the file name for later use
             newImg.alt = `${type} Image ` + (index + 1);
             const resizedDivItem = document.createElement("div");
-            resizedDivItem.className = `editor__dragHolder__img-item.${type}`;
+            resizedDivItem.className = `editor__dragHolder__img-item ${type}`;
 
-            resizedDivItem.innerHTML = `<img class="editor__dragHolder__img.${type}" src="${newImg.src}" alt="${newImg.alt}" />
-             <div class="editor__dragHolder__resize-required.${type}"></div>`;
+            resizedDivItem.innerHTML = `<img class="editor__dragHolder__img ${type}" src="${newImg.src}" alt="${newImg.alt}" />
+             <div class="editor__dragHolder__resize-required ${type}"></div>`;
             dragHolderContent.appendChild(resizedDivItem);
 
             imgFinalAddBtn.style.pointerEvents = "auto";
