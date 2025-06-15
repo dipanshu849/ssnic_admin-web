@@ -26,6 +26,8 @@
         </form>
       </div>
     </section>
+
+    <!-- HELPER STARTS -->
     <!-- loader -->
     <section class="loader"></section>
     <!-- calender -->
@@ -129,6 +131,19 @@
             />
           </form>
           <form action="">
+            <label for="editor__table-detail-form-file"> Upload File </label>
+            <div>
+              <input
+                type="file"
+                accept="application/pdf"
+                name="fileInput"
+                id="editor__table-detail-form-file"
+                required
+              />
+              <span class="input-file-icon"></span>
+            </div>
+          </form>
+          <form action="">
             <label for="editor__table-detail-form-result"> Result </label>
             <input
               type="text"
@@ -144,9 +159,11 @@
         </div>
       </div>
     </div>
+    <!-- HELPER ENDS -->
 
     <!-- Dashboard -->
     <main class="dashboard">
+      <!-- welcome section -->
       <section class="hero container section">
         <div class="hero-wrapper">
           <h2 class="hero__title">Welcome Back!</h2>
@@ -160,7 +177,7 @@
         </div>
         <div class="hero__views">
           <div>Views</div>
-          <div>0</div>
+          <div class="views__indicator">0</div>
         </div>
       </section>
       <hr class="container section" />
@@ -566,6 +583,13 @@
           <div class="news editor__list not-placeholder-list"></div>
         </div>
       </section>
+      <div
+        class="container"
+        style="color: var(--color-red-800); font-weight: 500"
+      >
+        NOTE: Adding detail to images for news images is required to display
+        them to the user
+      </div>
       <hr class="container section" />
 
       <!-- Table editor -->
@@ -916,15 +940,30 @@
           <div class="meta-data-links-content">
             <form action="">
               <label for="meta-data-yt-link">Youtube</label>
-              <input type="text" name="yt-link" id="meta-data-yt-link" />
+              <input
+                type="text"
+                name="yt-link"
+                id="meta-data-yt-link"
+                placeholder="https://www.youtube.com"
+              />
             </form>
             <form action="">
               <label for="meta-data-fb-link">Facebook</label>
-              <input type="text" name="fb-link" id="meta-data-fb-link" />
+              <input
+                type="text"
+                name="fb-link"
+                id="meta-data-fb-link"
+                placeholder="https://www.facebook.com"
+              />
             </form>
             <form action="">
               <label for="meta-data-insta-link">Instagram</label>
-              <input type="text" name="insta-link" id="meta-data-insta-link" />
+              <input
+                type="text"
+                name="insta-link"
+                id="meta-data-insta-link"
+                placeholder="https://www.instagram.com"
+              />
             </form>
             <form action="">
               <label for="meta-data-family-resources-link"
@@ -942,8 +981,21 @@
                 type="text"
                 name="address-map-link"
                 id="meta-data-address-map-link"
+                placeholder="https://www.google.com/maps"
               />
             </form>
+            <form action="">
+              <label for="meta-data-phoneNos">Phone Nos</label>
+              <input
+                type="text"
+                name="phoneNos"
+                id="meta-data-phoneNos"
+                placeholder="Eg. 1234567890, 1234567890"
+              />
+            </form>
+            <div style="color: var(--color-red-800)">
+              NOTE: For multiple phone numbers use comma(,)
+            </div>
           </div>
         </section>
       </div>

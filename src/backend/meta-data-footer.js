@@ -11,6 +11,7 @@ const getMetaDataFooter = () => {
   const addressMapLinkInputElement = document.querySelector(
     "#meta-data-address-map-link"
   );
+  const phoneNosInputElement = document.querySelector("#meta-data-phoneNos");
 
   const loader = document.querySelector(".loader");
 
@@ -19,18 +20,21 @@ const getMetaDataFooter = () => {
   let instaLink;
   let familyResourcesLink;
   let addressMapLink;
+  let phoneNos;
 
   let prevYtLink;
   let prevFbLink;
   let prevInstaLink;
   let prevFamilyResourcesLink;
   let prevAddressMapLink;
+  let prevPhoneNos;
 
   ytLinkInputElement.value = "";
   fbLinkInputElement.value = "";
   instaLinkInputElement.value = "";
   familyResourcesLinkInputElement.value = "";
   addressMapLinkInputElement.value = "";
+  phoneNosInputElement.value = "";
 
   // ------------------------------------------------------ Functions
   async function fetchMetaData() {
@@ -55,18 +59,21 @@ const getMetaDataFooter = () => {
         instaLinkInputElement.value = row.insta__link;
         familyResourcesLinkInputElement.value = row.family__resources__link;
         addressMapLinkInputElement.value = row.address__map__link;
+        phoneNosInputElement.value = row.phoneNos;
 
         prevYtLink = row.yt__link;
         prevFbLink = row.fb__link;
         prevInstaLink = row.insta__link;
         prevFamilyResourcesLink = row.family__resources__link;
         prevAddressMapLink = row.address__map__link;
+        prevPhoneNos = row.phoneNos;
 
         ytLink = prevYtLink;
         fbLink = prevFbLink;
         instaLink = prevInstaLink;
         familyResourcesLink = prevFamilyResourcesLink;
         addressMapLink = prevAddressMapLink;
+        phoneNos = prevPhoneNos;
       });
     });
   }
@@ -96,6 +103,11 @@ const getMetaDataFooter = () => {
     validateNUnlockUpdateBtn();
   }
 
+  function handleInputOnPhoneNosInputElement(e) {
+    phoneNos = e.currentTarget.value;
+    validateNUnlockUpdateBtn();
+  }
+
   function validateNUnlockUpdateBtn() {
     if (
       ytLink &&
@@ -103,12 +115,14 @@ const getMetaDataFooter = () => {
       instaLink &&
       familyResourcesLink &&
       addressMapLink &&
+      phoneNos &&
       !(
         ytLink == prevYtLink &&
         fbLink == prevFbLink &&
         instaLink == prevInstaLink &&
         familyResourcesLink == prevFamilyResourcesLink &&
-        addressMapLink == prevAddressMapLink
+        addressMapLink == prevAddressMapLink &&
+        phoneNos == prevPhoneNos
       )
     ) {
       updateBtn.style.opacity = "1";
@@ -129,6 +143,7 @@ const getMetaDataFooter = () => {
           yt__link: `${ytLink}`,
           family__resources__link: `${familyResourcesLink}`,
           address__map__link: `${addressMapLink}`,
+          phoneNos: `${phoneNos}`,
         })
         .eq("id", 1);
 
@@ -169,6 +184,9 @@ const getMetaDataFooter = () => {
   });
   addressMapLinkInputElement.addEventListener("input", (e) => {
     handleInputOnAddressMapLinkInputElement(e);
+  });
+  phoneNosInputElement.addEventListener("input", (e) => {
+    handleInputOnPhoneNosInputElement(e);
   });
   updateBtn.addEventListener("click", handleClickOnUpdateBtn);
 };

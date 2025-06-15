@@ -12,7 +12,6 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "@lemonadejs/calendar": "^5.0.0",
     "@supabase/supabase-js": "^2.49.8",
     "compressorjs": "^1.2.1",
     "vanilla-calendar-pro": "^3.0.4"

@@ -35,7 +35,7 @@
   font-size: var(--size-sm);
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
-  z-index: 998;
+  z-index: 98;
   width: 200px;
   margin: 0.5rem auto;
 }

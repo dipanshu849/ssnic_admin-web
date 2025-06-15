@@ -1,3 +1,4 @@
+import { remove } from "three/examples/jsm/libs/tween.module.js";
 import { supabase } from "../supabaseClient";
 
 // ##################################
@@ -36,6 +37,9 @@ const createNupdateData = (type) => {
   const venueInputElement = document.querySelector(
     "#editor__table-detail-form-venue"
   );
+  const eventTimeInputElementParent = document.querySelector(
+    "form:has(#editor__table-detail-form-event)"
+  );
   const eventTimeInputElementLabel = document.querySelector(
     "label:has(+ #editor__table-detail-form-event)"
   );
@@ -50,12 +54,21 @@ const createNupdateData = (type) => {
   );
   const loader = document.querySelector(".loader");
 
+  const fileInputForm = document.querySelector(
+    "form:has(#editor__table-detail-form-file)"
+  );
+  const fileInputElement = document.querySelector(
+    "#editor__table-detail-form-file"
+  );
+  const fileInputLoadingElement = document.querySelector(".input-file-icon");
+
   dateOfEventInputElement.value = "";
   startTimeInputElement.value = "";
   endTimeInputElement.value = "";
   venueInputElement.value = "";
   eventInputElement.value = "";
   resultInputElement.value = "";
+  fileInputElement.value = "";
 
   let dateOfEventInput;
   let startTimeInput = null;
@@ -63,13 +76,14 @@ const createNupdateData = (type) => {
   let venueInput = null;
   let eventInput = null;
   let resultInput = null;
+  let fileInput = null;
 
   if (type == "circulars-table") {
     dateOfEventInputElementLabel.textContent = "Date of submission";
     venueTimeInputElementLabel.textContent = "Title";
-    eventTimeInputElementLabel.textContent = "Link";
     venueInputElement.placeholder = "Eg. Fee structure 2025-26";
-    eventInputElement.placeholder = "link to document...";
+    fileInputForm.style.display = "block";
+    eventTimeInputElementParent.style.display = "none";
     startTimeInputElementParent.style.display = "none";
     endTimeInputElementParent.style.display = "none";
     resultInputElementParent.style.display = "none";
@@ -79,6 +93,8 @@ const createNupdateData = (type) => {
     eventTimeInputElementLabel.textContent = "Event";
     venueInputElement.placeholder = "Eg. Staff office";
     eventInputElement.placeholder = "Eg. Staff meeting";
+    fileInputForm.style.display = "none";
+    eventTimeInputElementParent.style.display = "flex";
     startTimeInputElementParent.style.display = "flex";
     endTimeInputElementParent.style.display = "flex";
     resultInputElementParent.style.display = "flex";
@@ -106,6 +122,7 @@ const createNupdateData = (type) => {
     eventInputElement.addEventListener("input", handleInputOnEventElement);
     resultInputElement.addEventListener("input", handleInputOnResultElement);
     updateTableDetailFormBtn.addEventListener("click", handleClickOnUpdateBtn);
+    fileInputElement.addEventListener("input", handleInputOnFileElement);
   }
 
   function handleClickOnCloseTableDetailFormBtn() {
@@ -117,6 +134,10 @@ const createNupdateData = (type) => {
     venueInputElement.value = "";
     eventInputElement.value = "";
     resultInputElement.value = "";
+
+    if (fileInputElement.value !== "") {
+      fileInputElement.value = "";
+    }
 
     dateOfEventInputElement.removeEventListener(
       "input",
@@ -141,6 +162,10 @@ const createNupdateData = (type) => {
       "click",
       handleClickOnUpdateBtn
     );
+    fileInputElement.removeEventListener("input", handleInputOnFileElement);
+    fileInputLoadingElement.classList.remove("uploaded");
+    fileInputLoadingElement.classList.remove("uploading");
+    fileInputLoadingElement.classList.remove("not-uploaded");
   }
 
   function handleInputOnDateOfEventElement(e) {
@@ -173,9 +198,47 @@ const createNupdateData = (type) => {
     validateInputsNUnlockUpdateBtn();
   }
 
+  async function uploadFileOnDatabase(file) {
+    let newFileName = `${file.name
+      .replaceAll(" ", "_")
+      .replaceAll("-", "")
+      .replaceAll("!", "")}`;
+    return new Promise(async (resolve, reject) => {
+      const { data, error } = await supabase.storage
+        .from("circulars-pdfs")
+        .upload(`${newFileName}`, file, {
+          cacheControl: "3600",
+          upsert: true,
+          contentType: "application/pdf",
+        });
+
+      if (error) {
+        console.log(error);
+        fileInputLoadingElement.classList.add("not-uploaded");
+        fileInputElement.classList.remove("uploaded");
+        fileInputLoadingElement.classList.remove("uploading");
+        alert("Try renaming the file and uploading again.");
+        reject(error);
+      }
+      resolve(data);
+    });
+  }
+
+  function handleInputOnFileElement(e) {
+    fileInput = e.target.files[0];
+    fileInputLoadingElement.classList.remove("uploaded");
+    fileInputLoadingElement.classList.add("uploading");
+
+    uploadFileOnDatabase(fileInput).then((data) => {
+      fileInputLoadingElement.classList.remove("uploading");
+      fileInputLoadingElement.classList.add("uploaded");
+      validateInputsNUnlockUpdateBtn();
+    });
+  }
+
   function validateInputsNUnlockUpdateBtn() {
     if (type == "circulars-table") {
-      if (dateOfEventInput && venueInput && eventInput) {
+      if (dateOfEventInput && venueInput && fileInput) {
         updateTableDetailFormBtn.style.opacity = "1";
         updateTableDetailFormBtn.style.pointerEvents = "auto";
       } else {
@@ -200,13 +263,17 @@ const createNupdateData = (type) => {
   }
 
   async function insertDataInEventsTable(type) {
+    let newFileName = `${fileInputElement.files[0].name
+      .replaceAll(" ", "_")
+      .replaceAll("-", "")
+      .replaceAll("!", "")}`;
     return new Promise(async (resolve, reject) => {
       let err;
       if (type == "circulars-table") {
         err = await supabase.from(`${type}`).insert({
           date: `${dateOfEventInput}`,
-          place: `${venueInput}`,
-          event: `${eventInput}`,
+          title: `${venueInput}`,
+          file__name: `${newFileName}`,
         });
       } else {
         err = await supabase.from(`${type}`).insert({
@@ -259,6 +326,7 @@ const readNremoveData = (type, e = null) => {
   let removeTableBodyItemBtn;
   let rowId;
   let selectedDateInput;
+  let inputFilePath;
   if (!e) {
     selectedDateInputElement.value =
       currentDate.getFullYear() +
@@ -284,11 +352,41 @@ const readNremoveData = (type, e = null) => {
   }
 
   // -------------------------------------------------------------------------- functions
+  async function fecthPathOfFile(rowId) {
+    const { data, error } = await supabase
+      .from("circulars-table")
+      .select("file__name")
+      .eq("id", rowId);
+    return data;
+  }
+
+  async function removeFileFromDatabase(path) {
+    return new Promise(async (resolve, reject) => {
+      const { data, error } = await supabase.storage
+        .from("circulars-pdfs")
+        .remove([`${path}`]);
+      if (error) {
+        console.log(error);
+        reject(error);
+      }
+      resolve(data);
+    });
+  }
+
   async function removeTableData(rowId) {
     return new Promise(async (resolve, reject) => {
-      const response = await supabase.from(`${type}`).delete().eq("id", rowId);
-
-      resolve(response);
+      if (type == "circulars-table") {
+        fecthPathOfFile(rowId).then((data) => {
+          inputFilePath = data[0].file__name;
+          removeFileFromDatabase(inputFilePath).then(async () => {
+            await supabase.from(`${type}`).delete().eq("id", rowId);
+            resolve();
+          });
+        });
+      } else {
+        await supabase.from(`${type}`).delete().eq("id", rowId);
+        resolve();
+      }
     });
   }
 
@@ -333,7 +431,7 @@ const readNremoveData = (type, e = null) => {
           class="editor__table-body-item-time delete-event-btn ${type}"
         ></div>
         <div class="editor__table-body-item-place ${type} ">Title</div>
-        <div class="editor__table-body-item-event ${type} ">Link</div>
+        <div class="editor__table-body-item-event ${type} ">File Name</div>
       `;
         tableBodyElement.appendChild(tableHeaderItem);
         data.forEach((row, index) => {
@@ -346,9 +444,9 @@ const readNremoveData = (type, e = null) => {
           </button>
         </div>
         <div class="editor__table-body-item-place ${type}">
-          ${row.place}
+          ${row.title}
         </div>
-        <div class="editor__table-body-item-event ${type}">${row.event}</div>`;
+        <div class="editor__table-body-item-event ${type}">${row.file__name}</div>`;
           tableBodyElement.appendChild(tableBodyItem);
           tableDataCounter.textContent = index + 1;
         });

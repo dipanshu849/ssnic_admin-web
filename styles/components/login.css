@@ -4,6 +4,7 @@
   align-items: center;
   height: 100dvh;
   --form-field-gap: 1rem;
+  z-index: 100000;
 }
 
 .login__container {

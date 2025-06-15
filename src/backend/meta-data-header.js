@@ -64,9 +64,56 @@ const getMetaDataHeader = () => {
     });
   }
 
+  async function getData() {
+    console.log("HERE");
+    return new Promise(async (resolve, reject) => {
+      let { data, error } = await supabase.storage.from("pdfs").list();
+
+      if (error) {
+        console.log(error);
+        reject(error);
+      }
+      resolve(data);
+    });
+  }
+
+  getData().then((data) => {
+    data.forEach((file) => {
+      if (file.name.includes("feeStructure")) {
+        feeStructureInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("admissionCriteria")) {
+        admissionCriteriaInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("admissionProcess")) {
+        admissionProcessInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("schoolDress")) {
+        schoolDressInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("curriculum")) {
+        curriculumInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("examSchedule")) {
+        examScheduleInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("listSports")) {
+        listSportsInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("sportsFacilities")) {
+        sportsFacilitiesInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      } else if (file.name.includes("schoolFacilities")) {
+        schoolFacilitiesInputElement.nextElementSibling.textContent =
+          file.updated_at.slice(0, 10);
+      }
+    });
+  });
+
   function handleInputOnFeeStructureInputElement(e) {
     feeStructure = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase("feeStructure", feeStructure, span, e).then(
       (data) => {
@@ -81,6 +128,7 @@ const getMetaDataHeader = () => {
   function handleInputOnAdmissionCriteriaInputElement(e) {
     admissionCriteria = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase(
       "admissionCriteria",
@@ -98,6 +146,8 @@ const getMetaDataHeader = () => {
   function handleInputOnAdmissionProcessInputElement(e) {
     admissionProcess = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
+
     uploadPdfFileToDatabase("admissionProcess", admissionProcess, span, e).then(
       (data) => {
         span.classList.remove("uploading");
@@ -111,6 +161,7 @@ const getMetaDataHeader = () => {
   function handleInputOnSchoolDressInputElement(e) {
     schoolDress = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase("schoolDress", schoolDress, span, e).then(
       (data) => {
@@ -125,6 +176,7 @@ const getMetaDataHeader = () => {
   function handleInputOnCurriculumInputElement(e) {
     curriculum = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase("curriculum", curriculum, span, e).then((data) => {
       span.classList.remove("uploading");
@@ -137,6 +189,7 @@ const getMetaDataHeader = () => {
   function handleInputOnExamScheduleInputElement(e) {
     examSchedule = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase("examSchedule", examSchedule, span, e).then(
       (data) => {
@@ -151,6 +204,7 @@ const getMetaDataHeader = () => {
   function handleInputOnListSportsInputElement(e) {
     listSports = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase("listSports", listSports, span, e).then((data) => {
       span.classList.remove("uploading");
@@ -163,6 +217,7 @@ const getMetaDataHeader = () => {
   function handleInputOnSportsFacilitiesInputElement(e) {
     sportsFacilities = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase("sportsFacilities", sportsFacilities, span, e).then(
       (data) => {
@@ -177,6 +232,7 @@ const getMetaDataHeader = () => {
   function handleInputOnSchoolFacilitiesInputElement(e) {
     schoolFacilities = e.currentTarget.files[0];
     const span = e.currentTarget.nextElementSibling;
+    span.innerHTML = "";
 
     uploadPdfFileToDatabase("schoolFacilities", schoolFacilities, span, e).then(
       (data) => {

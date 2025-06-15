@@ -22,6 +22,8 @@ const getMetaData = async () => {
   );
   const loader = document.querySelector(".loader");
 
+  const viewIndicator = document.querySelector(".views__indicator");
+
   let principalName;
   let facultyNum;
   let classroomNum;
@@ -65,6 +67,7 @@ const getMetaData = async () => {
         classroomNumInputElement.value = row.classroom__number;
         campusAreaInputElement.value = row.acre__campus;
         avgClassSizeInputElement.value = row.avg__class__size;
+        viewIndicator.innerHTML = `${row.views}`;
 
         prevPrincipalName = row.principal__name;
         prevFacultyNum = row.faculty__number;

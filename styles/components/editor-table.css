@@ -62,6 +62,10 @@
   gap: 1rem;
 }
 
+.editor__table-detail-form-body form {
+  overflow-x: auto;
+}
+
 .editor__table-detail-form-body label {
   font-size: var(--size-sm);
   font-weight: 500;
@@ -72,6 +76,10 @@
 .editor__table-detail-form-body form:not(:last-of-type) label::after {
   content: "*";
   color: var(--color-red-800);
+}
+
+#editor__table-detail-form-file {
+  overflow-x: hidden;
 }
 
 .editor__table-detail-form-body input {

@@ -155,6 +155,18 @@ const drapDrop = (
   function handleInputFileBtnClick() {
     const selectedFiles = inputFileBtn.files;
 
+    [...selectedFiles].forEach((file) => {
+      if (
+        file.type !== "image/jpeg" &&
+        file.type !== "image/png" &&
+        file.type !== "image/jpg"
+      ) {
+        alert("Only JPEG, JPG and PNG files are allowed.");
+        closeBtn.click();
+        return;
+      }
+    });
+
     [...selectedFiles].forEach((file, index) => {
       const newImg = document.createElement("img");
       newImg.file = file;

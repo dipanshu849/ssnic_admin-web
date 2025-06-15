@@ -13,10 +13,6 @@ import "../styles/calendar.css";
 import handleLogin from "./components/login.js";
 handleLogin();
 
-// supabase
-import handleData from "./backend/handleData.js";
-handleData();
-
 // handling a styling bug START
 const mediaQuery = window.matchMedia("(min-width: 1024px)");
 const editorContainer = document.querySelector(".editor__container");

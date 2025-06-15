@@ -44,6 +44,24 @@ const handleDetailToImg = (type) => {
     btn.style.pointerEvents = "none";
   });
 
+  const aboutDetailBtn = document.querySelectorAll(
+    ".editor__btn-add-details.about"
+  );
+  aboutDetailBtn.forEach((btn) => {
+    btn.disabled = true;
+    btn.style.opacity = 0.5;
+    btn.style.pointerEvents = "none";
+  });
+
+  const msgDetailBtn = document.querySelectorAll(
+    ".editor__btn-add-details.msg"
+  );
+  msgDetailBtn.forEach((btn) => {
+    btn.disabled = true;
+    btn.style.opacity = 0.5;
+    btn.style.pointerEvents = "none";
+  });
+
   //------------------------------------------------------------------------- FUNCTIONS
   function handleInputOnTitleElement(e) {
     titleValue = e.target.value.trim();

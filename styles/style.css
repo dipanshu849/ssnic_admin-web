@@ -339,3 +339,29 @@ hr {
   border-top-color: transparent;
   transform: rotate(315deg);
 }
+
+.not-uploaded {
+  display: inline-block;
+  height: 15px;
+  aspect-ratio: 1;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+.not-uploaded::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  inset: 0;
+  border-left: 3px solid red;
+  transform: translateX(40%);
+}
+
+.not-uploaded::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  inset: 0;
+  border-bottom: 3px solid red;
+  transform: translateY(-40%);
+}
