@@ -12,30 +12,3 @@ import "../styles/calendar.css";
 
 import handleLogin from "./components/login.js";
 handleLogin();
-
-// handling a styling bug START
-const mediaQuery = window.matchMedia("(min-width: 1024px)");
-const editorContainer = document.querySelector(".editor__container");
-const aboutEditor = document.querySelector(".editor__about");
-const msgEditor = document.querySelector(".editor__msg");
-
-const classListArr = ["container", "section"];
-
-if (mediaQuery.matches) {
-  editorContainer.classList.add(...classListArr);
-  aboutEditor.classList.remove(...classListArr);
-  msgEditor.classList.remove(...classListArr);
-}
-
-mediaQuery.addEventListener("change", (event) => {
-  if (event.matches) {
-    editorContainer.classList.add(...classListArr);
-    aboutEditor.classList.remove(...classListArr);
-    msgEditor.classList.remove(...classListArr);
-  } else {
-    editorContainer.classList.remove(...classListArr);
-    aboutEditor.classList.add(...classListArr);
-    msgEditor.classList.add(...classListArr);
-  }
-});
-// handling a styling bug END
