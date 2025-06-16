@@ -26,6 +26,7 @@ const drapDrop = (
   const dragHolderContent = document.querySelector(
     `.editor__dragHolder-content.${type}`
   );
+  dragHolderContent.style.backdropFilter = "brightness(1)";
   const imgCounter = document.querySelector(
     `.editor__dragHolder-img-count.${type}`
   );
@@ -54,6 +55,7 @@ const drapDrop = (
     document.body.style.overflowY = "auto";
     imgCounter.textContent = 0;
     listOfResizedImgs = [];
+    dragHolderContent.style.backdropFilter = "brightness(1)";
     removeAllDisplayedImages();
   }
 
@@ -155,6 +157,16 @@ const drapDrop = (
 
   function dragOverHandler(e) {
     e.preventDefault(); // prevent from opening file
+  }
+
+  function dragEnterHandler(e) {
+    e.preventDefault();
+    e.currentTarget.style.backdropFilter = "brightness(0.5)";
+  }
+
+  function dragLeaveHandler(e) {
+    e.preventDefault();
+    e.currentTarget.style.backdropFilter = "brightness(1)";
   }
 
   function handleInputFileBtnClick() {
@@ -276,6 +288,12 @@ const drapDrop = (
     signal: controller ? controller.signal : undefined,
   });
   dragHolderContent.addEventListener("dragover", dragOverHandler, {
+    signal: controller ? controller.signal : undefined,
+  });
+  dragHolderContent.addEventListener("dragenter", dragEnterHandler, {
+    signal: controller ? controller.signal : undefined,
+  });
+  dragHolderContent.addEventListener("dragleave", dragLeaveHandler, {
     signal: controller ? controller.signal : undefined,
   });
   inputFileBtn.addEventListener("change", handleInputFileBtnClick, {

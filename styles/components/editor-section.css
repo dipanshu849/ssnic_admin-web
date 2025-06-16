@@ -213,6 +213,7 @@ body {
   align-items: center;
   overflow-x: auto;
   overflow-y: hidden;
+  z-index: 1000;
 }
 
 .editor__dragHolder-content svg {
@@ -224,6 +225,8 @@ body {
   height: 40%;
   object-fit: cover;
   color: var(--color-slate-600);
+  z-index: -1000;
+  pointer-events: none;
 }
 
 .editor__dragHolder-content svg:has(+ .editor__dragHolder__img-item) {

@@ -65,7 +65,6 @@ const getMetaDataHeader = () => {
   }
 
   async function getData() {
-    console.log("HERE");
     return new Promise(async (resolve, reject) => {
       let { data, error } = await supabase.storage.from("pdfs").list();
 

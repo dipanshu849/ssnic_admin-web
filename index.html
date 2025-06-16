@@ -130,7 +130,10 @@
             />
           </form>
           <form action="">
-            <label for="editor__table-detail-form-file"> Upload File </label>
+            <label for="editor__table-detail-form-file">
+              Upload File
+              <span style="color: var(--color-red-800)">Pdf files only</span>
+            </label>
             <div>
               <input
                 type="file"
@@ -823,6 +826,9 @@
         <!-- header-links -->
         <section class="meta-data-header">
           <h2 class="meta-data-header-title">Menu links</h2>
+          <span style="font-size: var(--size-base); color: var(--color-red-800)"
+            >(PDF files)</span
+          >
           <div class="meta-data-header-content">
             <form action="">
               <label for="meta-data-header-fee-structure-link"

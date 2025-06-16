@@ -42,7 +42,7 @@ const handleLogin = () => {
       } else {
         if (
           loginForm.username.value === "admin" &&
-          loginForm.password.value === "admin@859#sdf@e4dfsap"
+          loginForm.password.value === "admin@1234"
         ) {
           alert("SUCCESS! You are now logged in.");
           document.body.appendChild(clonedDashBoard);
