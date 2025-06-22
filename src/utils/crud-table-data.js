@@ -288,10 +288,6 @@ const createNupdateData = (type) => {
         });
       }
 
-      if (err) {
-        console.log("ERR: ", err);
-        reject;
-      }
       resolve(err);
     });
   }
@@ -299,7 +295,6 @@ const createNupdateData = (type) => {
   function handleClickOnUpdateBtn() {
     loader.style.display = "block";
     document.body.overflow = "hidden";
-    console.log("CLICKED");
     insertDataInEventsTable(type).then((err) => {
       closeTableDetailFormBtn.click();
       readNremoveData(type);
